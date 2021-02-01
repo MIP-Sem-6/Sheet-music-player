@@ -1,0 +1,125 @@
+{% include 'main/header.html' %}
+{% load static %}
+
+<li class="menu-item free-quote">
+    <div class="main-pink-button">
+      <a href="#!" role="button" data-toggle="modal" data-target="#exampleModalLong">Add Music</a>
+    </div>
+  </li>
+  
+  
+        <!-- Recent Cases -->
+        <section class="recent-cases">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="section-heading">
+                  <h6>#Trending</h6>
+                  <h2>Popular compositions</h2>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="portfolio-filters">
+                  <ul>
+                      <li class="active" data-filter="*">Show All</li>
+                      <li data-filter=".category-analysis">Happy</li>
+                      <li data-filter=".category-digital">Classical</li>
+                      <li data-filter=".category-seo">Romantic</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row masonry-layout filters-content normal-col-gap">
+                  <div class="col-lg-4 masonry-item all category-analysis">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-01.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                        <audio controls>
+                          <source src="{% static 'main/songs/aot.mp3' %}" type="audio/mpeg">
+                      </audio>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 masonry-item all category-seo">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-02.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 masonry-item all category-digital">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-03.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 masonry-item all category-digital">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-04.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 masonry-item all category-analysis">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-05.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 masonry-item all category-seo">
+                    <div class="case-item">
+                      <a href="single-project.html">
+                      <div class="case-thumb">
+                        <img src="{% static 'main/images/case-item-06.jpg'%}" alt="">
+                      </div>
+                      <div class="down-content">
+                        <h4>Get Faster &amp; Better Results</h4>
+                        <span>Analysis, Digital Marketing</span>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="main-purple-button">
+                  <a href="portfolio-v1.html">View All Cases</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+        {% include 'main/footer.html' %}

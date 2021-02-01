@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sheet music player</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/fonts/font-awesome/css/font-awesome.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/styles/bootstrap.css'%}" />
+    <link rel="stylesheet" href="{% static 'main/styles/main.css'%}" />
+  </head>
+
+  <body>
+    
+    <!-- Preloader -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="content">
+        <img src="{% static 'main/images/logo-icon.png" alt="">
+      </div>
+      <div class="preloader-inner">
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav-wrapper">
+      <div class="mobile-menu-inner">
+        <ul class="mobile-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li class="has-sub"><a href="#">Pages <i class="sub-icon fa fa-angle-down"></i></a>
+            <ul class="sub-menu">
+              <li><a href="about-us.html">About Us</a></li>
+              <li><a href="our-team.html">Our Team</a></li>
+              <li><a href="pricing-plans.html">Pricing Plans</a></li>
+              <li><a href="testimonials.html">Testimonials</a></li>
+              <li><a href="error-page.html">404 Error Page</a></li>
+              <li><a href="page-headings.html">Page Headings</a></li>
+              <li><a href="page-headings.html"></a></li>
+            </ul>
+          </li>
+          <li class="has-sub"><a href="#">Portfolio <i class="sub-icon fa fa-angle-down"></i></a>
+            <ul class="sub-menu">
+              <li><a href="portfolio-v1.html">Portfolio Version 1</a></li>
+              <li><a href="portfolio-v2.html">Portfolio Version 2</a></li>
+              <li><a href="portfolio-v3.html">Portfolio Version 3</a></li>
+              <li><a href="single-project.html">Single Project</a></li>
+            </ul>
+          </li>
+          <li class="has-sub"><a href="#">Blog Entries <i class="sub-icon fa fa-angle-down"></i></a>
+            <ul class="sub-menu">
+              <li><a href="blog-v1.html">Blog Version 1</a></li>
+              <li><a href="blog-v2.html">Blog Version 2</a></li>
+              <li><a href="blog-v3.html">Blog Version 3</a></li>
+              <li><a href="single-post.html">Single Post</a></li>
+            </ul>
+          </li>
+          <li class="has-sub"><a href="#">Shop <i class="sub-icon fa fa-angle-down"></i></a>
+            <ul class="sub-menu">
+              <li><a href="our-shop.html">Our Products</a></li>
+              <li><a href="single-product.html">Single Product</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mobile-menu-overlay"></div>
+
+    <!-- Header -->
+    <header class="site-header fixed-header">
+      <div class="container expanded">
+        <div class="header-wrap">
+         <!-- <div class="fixed-header-logo">
+            <a href="index.html"><img src="{% static 'main/images/logo-white.png'%}" alt=""></a>
+          </div> -->
+          <div class="is-fixed-header-logo">
+            <a href="index.html"><img src="{% static 'main/images/logo.png'%}" alt=""></a>
+          </div> 
+          <div class="header-nav">
+              <ul class="main-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Collections</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="services.html">Scan & play</a></li>
+                <li><a href="services.html">Share</a></li>
+                <li><a href="services.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+              </ul>    
+          </div>
+          <div class="header-widgets">
+            <ul class="right-menu">
+              <li class="menu-item menu-search">
+                <a href="#search" id="menu-search-btn">
+                  <i class="fa fa-search"></i>
+                </a>
+              </li>
+              <li class="menu-item free-quote">
+                <div class="main-pink-button">
+                  <a href="#!">Log out</a>
+                </div>
+              </li>
+              <li class="menu-item menu-mobile-nav">
+                <a href="#" class="menu-bar" id="menu-show-mobile-nav">
+                  <span class="hamburger"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header -->
+    
+    <!-- Search -->
+    <div id="search">
+      <button type="button" class="close">×</button>
+        <form>
+            <input type="search" value="" placeholder="Type to search..." required="">
+            <button type="submit" class="primary-button"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+   
+   
