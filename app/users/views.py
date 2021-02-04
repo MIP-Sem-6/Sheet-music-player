@@ -9,6 +9,9 @@ from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
     if request.method == 'POST':
         username=request.POST.get("username")
         psw =request.POST.get("pass")
@@ -26,6 +29,9 @@ def signin(request):
 
 #Sign up 
 def register(request,id,tab):
+    if request.user.is_authenticated:
+        return redirect('index')
+        
     page = 1
     uname = ''
     if tab==2:

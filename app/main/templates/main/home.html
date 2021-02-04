@@ -1,38 +1,17 @@
 {% load static %}
 
 {% include 'main/header.html' %}
-    
-    <div class="main-content">
-      
-      <!-- Main Banner -->
-      <div class="parallax-banner">
-        <!--Content before waves-->
-        <div class="inner-header">
-          <div class="inner-content">
-            <h1>Sheet Music Player</h1>
-            <div class="main-decoration">
-              <img src="images/baner-main-decoration.png" alt="">
-            </div>
-          </div>
-        </div>
+    <style>
+      .case-item {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
 
-        <!--Waves Container-->
-        <div>
-          <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-          <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-          </defs>
-          <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-          </g>
-          </svg>
-        </div>
-        <!--Waves end-->
-      </div>
+.case-item:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+    </style>
 
 
 
@@ -58,87 +37,26 @@
             </div>
             <div class="col-lg-12">
               <div class="row masonry-layout filters-content normal-col-gap">
+
+                {% for obj in my_songs %}
                 <div class="col-lg-4 masonry-item all category-analysis">
                   <div class="case-item">
                     <a href="single-project.html">
                     <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-01.jpg'%}" alt="">
+                      <img src="{{ obj.cover_image.url }}" alt="">
                     </div>
                     <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
+                      <h4>{{ obj.title }}</h4>
+                      <span>{{ obj.user.username }}</span> 
                       <audio controls>
-                        <source src="{% static 'main/songs/aot.mp3' %}" type="audio/mpeg">
+                        <source src="{{ obj.file.url }}" type="audio/mpeg">
                     </audio>
                     </div>
                     </a>
                   </div>
                 </div>
-                <div class="col-lg-4 masonry-item all category-seo">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-02.jpg'%}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-4 masonry-item all category-digital">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-03.jpg'%}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-4 masonry-item all category-digital">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-04.jpg'%}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-4 masonry-item all category-analysis">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-05.jpg'%}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-lg-4 masonry-item all category-seo">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{% static 'main/images/case-item-06.jpg'%}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>Get Faster &amp; Better Results</h4>
-                      <span>Analysis, Digital Marketing</span>
-                    </div>
-                    </a>
-                  </div>
-                </div>
+                {% endfor %}
+              
               </div>
             </div>
             <div class="col-lg-12">
