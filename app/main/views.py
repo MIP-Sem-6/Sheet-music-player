@@ -11,6 +11,15 @@ def index(request):
     my_songs = Song.objects.all()
     my_songs = my_songs.filter(user=request.user.id)
 
+    if request.is_ajax():
+        count =request.POST.get('count')
+        sid =request.POST.get('id')
+        if int(count) == 1:
+            sid = int(sid)
+            song = Song.objects.get(id=sid)
+            song.play_count = 1 + song.play_count
+            song.save()
+
     context = {
         'my_songs' : my_songs,
     }
@@ -19,7 +28,13 @@ def index(request):
 def profile(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
-    return render(request,'main/profile.html')
+    my_songs = Song.objects.all()
+    my_songs = my_songs.filter(user=request.user.id)
+
+    context = {
+        'my_songs' : my_songs,
+    }
+    return render(request,'main/profile.html',context)
 
 def logout_view(request):
     if not request.user.is_authenticated:

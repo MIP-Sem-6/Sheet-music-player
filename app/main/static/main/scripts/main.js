@@ -1,5 +1,4 @@
 (function($) {
-  "use strict";
 
   $(window).on('scroll', function() {
     if ($(this).scrollTop() > 500) {
@@ -103,165 +102,16 @@
   }
 
 
-  /**
-   * Owl Carousel 
-   */
-
-
-  $('.owl-courses').owlCarousel({
-      loop: true,
-      nav: false,
-      dots: true,
-      items: 3,
-      margin: 0,
-      autoplay: false,
-      smartSpeed: 700,
-      autoplayTimeout: 6000,
-      responsive: {
-      0: {
-          items: 1,
-          margin: 0
-      },
-      460: {
-          items: 1,
-          margin: 0
-      },
-      576: {
-          items: 2,
-          margin: 0
-      },
-      992: {
-          items: 3,
-          margin: 0
-      }
-    }
-  });
+  
 
 
 
-  $('.owl-testimonials').owlCarousel({
-      loop: true,
-      nav: true,
-      dots: true,
-      items: 3,
-      margin: 0,
-      autoplay: false,
-      smartSpeed: 700,
-      autoplayTimeout: 6000,
-      responsive: {
-      0: {
-          items: 1,
-          margin: 0
-      },
-      460: {
-          items: 1,
-          margin: 0
-      },
-      576: {
-          items: 2,
-          margin: 0
-      },
-      992: {
-          items: 2,
-          margin: 0
-      }
-    }
-  });
-
-
-
-
-  /**
-   * Fun Facts
-   */
-  function funFacts() {
-    var counters = $('.count-digit');
-
-    if (counters.length) {
-        counters.each(function () {
-          var counter = $(this);
-          counter.appear(function () {
-            counter.parent().css({'opacity': 1});
-
-            //Counter zero type
-            var max = parseFloat(counter.text());
-            counter.countTo({
-                from: 0,
-                to: max,
-                speed: 1500,
-                refreshInterval: 100
-            });
-
-        }, {accX: 0, accY: 0});
-      });
-    }
-  }
-
-
-  $('.skill-box').find('b').each(function (i) {
-    return $(this).prop('Counter', 0).animate({
-        Counter: $(this).parent().data('percent')
-      }, {
-        duration: 1000,
-        easing: 'swing',
-        step(now) {
-          return $(this).text(Math.ceil(now) + '%');
-        }
-      });
-    });
-
-    return $('.skill-box .skills-circle li').each(function (i) {
-    const _right = $(this).find('.bar-circle-right');
-    const _left = $(this).find('.bar-circle-left');
-    const _percent = $(this).attr('data-percent');
-    let deg = 3.6 * _percent;
-    if (_percent <= 50) {
-      return _right.animate({
-        circle_rotate: deg
-      }, {
-        step(deg) {
-          $(this).css('transform', `rotate(${deg}deg)`);
-        },
-        duration: 1000
-      });
-    } else {
-      const full_deg = 180;
-      deg -= full_deg;
-      let run_duration = 1000 * (50 / _percent);
-      return _right.animate({
-        circle_rotate: full_deg
-      }, {
-        step(full_deg) {
-          $(this).css('transform', `rotate(${full_deg}deg)`);
-        },
-        duration: run_duration,
-        easing: 'linear',
-        complete() {
-          run_duration -= 1000;
-          _left.css({
-            'clip': 'rect(0, 144px, 144px, 75px)',
-            'background': '#fb638f'
-          });
-          return _left.animate({
-            circle_rotate: deg
-          }, {
-            step(deg) {
-              $(this).css('transform', `rotate(${deg}deg)`);
-            },
-            duration: Math.abs(run_duration),
-            easing: 'linear'
-          });
-        }
-      });
-    }
-  });
     
 
 
 })(jQuery);
 
 (function($) {
-  "use strict";
 
   $(document).ready(onDocumentReady);
 
@@ -379,7 +229,7 @@
       $('a[href="#search"]').on('click', function(event) {
           event.preventDefault();
           $('#search').addClass('open');
-          $('#search > form > input[type="search"]').focus();
+          $('#search  > input[type="search"]').focus();
       });
       
       $('#search, #search button.close').on('click keyup', function(event) {
@@ -388,13 +238,7 @@
           }
       });
       
-      
-      //Do not include! This prevents the form from submitting for DEMO purposes only!
-      $('form').submit(function(event) {
-          event.preventDefault();
-          return false;
-      })
-  });
+    
 
   function onDocumentReady() {
     setTimeout(function() {
@@ -449,7 +293,6 @@
 })(jQuery);
 
 (function($) {
-  "use strict";
 
   $(document).ready(onDocumentReady);
 
@@ -539,4 +382,4 @@
       ps.update();
     });
   }
-})(jQuery);
+})(jQuery);})

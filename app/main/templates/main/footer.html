@@ -72,6 +72,9 @@
           </div>
         </div>
       </section>
+
+    
+     
      
   
       <!-- Go To Top -->
@@ -79,7 +82,7 @@
   
   
       <!-- Scripts -->
-      <script src="{% static 'main/scripts/vendors/jquery-3.4.1.min.js'%}"></script>
+     <script src="{% static 'main/scripts/vendors/jquery-3.4.1.min.js'%}"></script>
       <script src="{% static 'main/scripts/vendors/jquery.hoverIntent.min.js'%}"></script>
       <script src="{% static 'main/scripts/vendors/perfect-scrollbar.min.js'%}"></script>
       <script src="{% static 'main/scripts/vendors/jquery.easing.min.js'%}"></script>
@@ -93,7 +96,33 @@
       <script src="{% static 'main/scripts/vendors/jquery.countTo.js'%}"></script>
       <script src="{% static 'main/scripts/vendors/slide-nav.min.js'%}"></script>
       <script src="{% static 'main/scripts/vendors/accordions.js'%}"></script>
-      <script src="{% static 'main/scripts/main.js'%}"></script>
+     <!-- <script src="{% static 'main/scripts/main.js'%}"></script> -->
+     <script src="{% static 'main/scripts/custom.js'%}"></script>
+     
+
+{% block javascript %}
+
+<script>
+  let c = 1;
+  
+  function sendCount(id) {
+  console.log(c);
+  $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'count': c,
+        'id':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+
+  }
+
+  
+</script>
+{% endblock %}
       
   
     </body>
