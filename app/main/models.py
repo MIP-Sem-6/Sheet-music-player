@@ -18,3 +18,13 @@ class Song(models.Model):
     
     class Meta:
         unique_together = [['user','title','added_date']]
+
+class FavouriteSong(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    song = models.ForeignKey(Song,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user} hearts {self.song}'
+    
+    class Meta:
+        unique_together = [['user','song']]

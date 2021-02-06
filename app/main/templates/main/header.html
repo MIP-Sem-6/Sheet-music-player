@@ -10,9 +10,14 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="{% static 'main/fonts/font-awesome/css/font-awesome.min.css' %}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 
     <link rel="stylesheet" href="{% static 'main/styles/bootstrap.css'%}" />
     <link rel="stylesheet" href="{% static 'main/styles/main.css'%}" />
+    <link rel="stylesheet" href="{% static 'main/styles/custom.css'%}" />
   </head>
 
   <body>
@@ -84,7 +89,7 @@
           <div class="header-nav">
               <ul class="main-menu">
                 <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="services.html">Collections</a></li>
+                <li><a href="services.html">Favourites</a></li>
                 <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="services.html">Scan & play</a></li>
                 <li><a href="services.html">Share</a></li>

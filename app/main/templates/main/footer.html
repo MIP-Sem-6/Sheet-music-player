@@ -103,10 +103,10 @@
 {% block javascript %}
 
 <script>
+
   let c = 1;
   
   function sendCount(id) {
-  console.log(c);
   $.ajax({
       url: "{% url 'index' %}",
       type: "POST",
@@ -118,6 +118,28 @@
       dataType: 'json'
     });
 
+  }
+
+  function favButton(id)
+  {
+    let sid = "#heart"+String(id);
+    if($(sid).hasClass("liked")){
+      $(sid).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+      $(sid).removeClass("liked");
+    }else{
+      $(sid).html('<i class="fa fa-heart" aria-hidden="true"></i>');
+      $(sid).addClass("liked");
+      console.log('hiii');
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'add_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+    }
   }
 
   

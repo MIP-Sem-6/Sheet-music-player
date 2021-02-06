@@ -4791,7 +4791,7 @@ section.our-team {
       background-color: #ffffff; }
       section.our-team .team-item .down-content h4 {
         letter-spacing: 0.25px;
-        margin-bottom: 5px; }
+        margin-bottom: 1px; }
       section.our-team .team-item .down-content span {
         font-size: 14px;
         color: #fd658f; }
@@ -6072,7 +6072,7 @@ section.recent-cases .case-item {
     padding: 30px 30px 25px 30px; }
     section.recent-cases .case-item .down-content h4 {
       letter-spacing: 0.25px;
-      margin-bottom: 10px; }
+      margin-bottom: 1px; }
     section.recent-cases .case-item .down-content span {
       font-size: 14px;
       color: #fd658f; }
