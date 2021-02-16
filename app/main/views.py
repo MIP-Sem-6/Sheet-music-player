@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Song, FavouriteSong
+from .models import Song
 from django.contrib.auth import logout
 
 # Create your views here.
@@ -20,10 +20,17 @@ def index(request):
             song.save()
         
         fav_song = request.POST.get('add_fav')
-        print(fav_song)
         if(fav_song):
             fs = Song.objects.get(id=int(fav_song))
-            FavouriteSong(user=request.user,song=fs).save()
+            fs.likedby.add(request.user)
+
+        remove_song = request.POST.get('remove_fav')
+        if(remove_song):
+            rs = Song.objects.get(id=int(remove_song))
+            rs.likedby.remove(request.user)
+
+    for x in trending_songs:
+        print(x.get_is_liked(request.user))
 
 
     context = {
@@ -36,6 +43,28 @@ def profile(request):
         return redirect('errorpage')
     my_songs = Song.objects.all()
     my_songs = my_songs.filter(user=request.user.id)
+
+    if request.is_ajax():
+        count =request.POST.get('count')
+        sid =request.POST.get('id')
+        if int(count) == 1:
+            sid = int(sid)
+            song = Song.objects.get(id=sid)
+            song.play_count = 1 + song.play_count
+            song.save()
+
+
+    context = {
+        'my_songs' : my_songs,
+    }
+    return render(request,'main/profile.html',context)
+
+def fav(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    my_songs = Song.objects.all()
+    my_songs = my_songs.filter(likedby=request.user)
 
     if request.is_ajax():
         count =request.POST.get('count')

@@ -120,16 +120,28 @@
 
   }
 
-  function favButton(id)
+  function favButton(id,flag)
   {
     let sid = "#heart"+String(id);
-    if($(sid).hasClass("liked")){
+
+    if($(sid).hasClass("fa-heart")){
       $(sid).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-      $(sid).removeClass("liked");
     }else{
       $(sid).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-      $(sid).addClass("liked");
-      console.log('hiii');
+    }
+    if (flag=="True")
+    {
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'remove_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+    }
+    else{
       $.ajax({
       url: "{% url 'index' %}",
       type: "POST",
@@ -139,10 +151,10 @@
       },
       dataType: 'json'
     });
-    }
-  }
 
+    }
   
+  }  
 </script>
 {% endblock %}
       
