@@ -87,3 +87,10 @@ def logout_view(request):
 
     logout(request)
     return redirect('signin') 
+
+
+def form(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    return render(request,'main/form.html')

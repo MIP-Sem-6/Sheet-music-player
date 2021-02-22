@@ -5188,10 +5188,12 @@ section.free-quote {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center; }
+  background-position: center center;
+  color: #ffffff;  }
   @media (min-width: 992px) {
     section.free-quote {
-      padding: 120px 0px; } }
+      padding: 120px 0px;
+    } }
   section.free-quote .left-image {
     -webkit-animation: move-up-down 3s infinite;
             animation: move-up-down 3s infinite;
@@ -5210,9 +5212,9 @@ section.free-quote {
     margin-bottom: 30px;
     width: 100%;
     height: 48px;
-    background-color: rgba(250, 250, 250, 0.15);
+    
     border: none;
-    border-radius: 24px;
+    background-color: rgba(250, 250, 250, 0.15);
     outline: none;
     padding: 0px 20px;
     color: #ffffff;
