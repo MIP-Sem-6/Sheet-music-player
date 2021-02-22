@@ -53,8 +53,8 @@
                       <h4>{{ obj.title }}</h4>
                       <span>{{ obj.user.username }} </span> <br>
 
-                      <span id = "heart{{obj.id}}" onclick="favButton({{obj.id}},'{{obj|get_liked:request.user}}'
-                      );"><i class="fa {% if obj|get_liked:request.user == True %}
+                      <span onclick="favButton({{obj.id}},'{{obj|get_liked:request.user}}'
+                      );"><i id = "heart{{obj.id}}" class="fa {% if obj|get_liked:request.user == True %}
                       fa-heart  {% else %} fa-heart-o {% endif %}
                       animate__bounce " aria-hidden="true" ></i> </span>
 

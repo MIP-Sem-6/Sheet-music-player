@@ -12,7 +12,7 @@ class Song(models.Model):
     cover_image = models.ImageField(default='default_cover.jpg',upload_to='cover_images')
     play_count = models.IntegerField(default=0)
     added_date = models.DateTimeField(auto_now_add=True)
-    likedby = models.ManyToManyField(User,related_name='likedby')
+    likedby = models.ManyToManyField(User,related_name='likedby',blank=True)
 
     def get_is_liked(self,user):
         objs = self.likedby.all()

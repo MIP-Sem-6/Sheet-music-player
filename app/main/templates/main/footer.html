@@ -124,13 +124,10 @@
   {
     let sid = "#heart"+String(id);
 
-    if($(sid).hasClass("fa-heart")){
-      $(sid).html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
-    }else{
-      $(sid).html('<i class="fa fa-heart" aria-hidden="true"></i>');
-    }
     if (flag=="True")
     {
+      console.log('unliked');
+
       $.ajax({
       url: "{% url 'index' %}",
       type: "POST",
@@ -140,6 +137,8 @@
       },
       dataType: 'json'
     });
+    $(sid).removeClass("fa-heart");
+    $(sid).addClass("fa-heart-o");
     }
     else{
       $.ajax({
@@ -153,6 +152,9 @@
     });
 
     }
+    $(sid).removeClass("fa-heart-o");
+    $(sid).addClass("fa-heart");
+    console.log('liked');
   
   }  
 </script>

@@ -17,7 +17,7 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 <li class="menu-item free-quote">
     <div class="main-pink-button">
-      <a href="#!" role="button" data-toggle="modal" data-target="#exampleModalLong">Add Music</a>
+      <a href="{% url 'form' %}" role="button" data-toggle="modal" data-target="#exampleModalLong">Add Music</a>
     </div>
   </li>
   
@@ -49,13 +49,13 @@ box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                   <div class="case-item">
                     <a href="single-project.html">
                     <div class="case-thumb">
-                      <img src="{{ obj.cover_image.url }}" alt="">
+                      <img src="{{ obj.cover_image }}" alt="">
                     </div>
                     <div class="down-content">
                       <h4>{{ obj.title }}</h4>
                       <span>{{ obj.user.username }}</span> 
                       <audio controls id="soundPlayer">
-                        <source src="{{ obj.file.url }}" type="audio/mpeg">
+                        <source src="{{ obj.file }}" type="audio/mpeg">
                     </audio>
                     </div>
                     </a>
