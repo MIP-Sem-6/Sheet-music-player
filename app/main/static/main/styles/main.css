@@ -7210,3 +7210,37 @@ section.related-products {
       padding-bottom: 120px; } }
   section.related-products .section-heading {
     margin-bottom: 40px; }
+
+    section.free-quote .multipleSelection { 
+      width: 300px; 
+      background-color: #BCC2C1; 
+  } 
+
+  section.free-quote .selectBox { 
+      position: relative; 
+  } 
+
+  section.free-quote .selectBox select { 
+      width: 100%; 
+      font-weight: bold; 
+  } 
+
+  section.free-quote .overSelect { 
+      position: absolute; 
+      left: 0; 
+      right: 0; 
+      top: 0; 
+      bottom: 0; 
+  } 
+
+  #checkBoxes { 
+      display: none; 
+      border: 1px #8DF5E4 solid; 
+  } 
+
+  section.free-quote #checkBoxes label { 
+      display: block; 
+  } 
+
+  section.free-quote #checkBoxes label:hover { 
+      background-color: #4F615E; 

@@ -89,7 +89,7 @@ def logout_view(request):
     return redirect('signin') 
 
 
-def form(request):
+def add_song_form(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
@@ -105,4 +105,22 @@ def form(request):
 
 
 
-    return render(request,'main/form.html')
+    return render(request,'main/_song_form.html')
+
+def update_song_form(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    if request.method == 'POST':
+        filename =request.FILES['file']
+        title =request.POST.get("title")
+        album =request.POST.get("album")
+        img =request.FILES["image"]
+        tags =request.POST.get("tags")
+        u = request.user
+
+        Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
+
+
+
+    return render(request,'main/update_song_form.html')

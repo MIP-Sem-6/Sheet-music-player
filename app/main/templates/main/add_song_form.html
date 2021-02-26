@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-lg-6 align-self-center">
           <div class="left-image">
-            <img src="{% static 'main/images/headphone.jpeg' %}" alt="headphones">
+            <img src="{% static 'main/images/headphones.png' %}" alt="headphones">
           </div>
         </div>
         <div class="col-lg-6 align-self-center">
@@ -20,15 +20,25 @@
             <div class="row">Upload file...
               <div class="col-lg-8">
                 <input type="file" id="file" placeholder="" required="" name="file">
-              </div>
+              </div>Title of the song...
+              <div class="col-lg-8">
+                <input type="text" id="title" placeholder="" required="" name="title">
+              </div>Album of the song...
+              <div class="col-lg-8">
+                <input type="text" id="album" placeholder="" required="" name="album">
+              </div>Choose a mood (press ctrl to choose multiple) ...
               <div class="col-lg-4">
-                <input type="text" id="title" placeholder="Title of the song..." required="" name="title">
-              </div>
-              <div class="col-lg-4">
-                <input type="text" id="album" placeholder="Album of the song..." required="" name="album">
-              </div>
-              <div class="col-lg-4">
-                <input type="text" id="tags" placeholder="happy/sad/classical/romantic/chill" required="" name="tags">
+
+                  
+                  <select name="tags" id="tags" multiple>
+                    <option value="happy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="classical">Classical</option>
+                    <option value="romantic">Romantic</option>
+                  </select>
+                  <br><br><br>
+
+                
               </div>Upload cover photo of the song...
               <div class="col-lg-6">
                 <input type="file" id="cover" placeholder="" required="" name="image">
