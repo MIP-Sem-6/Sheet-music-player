@@ -17,32 +17,41 @@
           </div>
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
+            <div class="col-lg-6">
+           
+              <img id="image" src="{{ song.cover_image.url }}" />
+              <input type="file" id="files" name="image" />
+
+              </div>
+
             <div class="row">Upload file...
               <div class="col-lg-8">
-                <input type="file" id="file" placeholder="" required="" name="file">
-              </div>Title of the song...
+                <audio controls controls id="soundPlayer">
+                  <source src="{{ song.file.url }}" type="audio/mpeg">
+              </audio>
+                <input type="file" id="file" placeholder=""  name="file"">
+              </div>
+              Title of the song...
               <div class="col-lg-8">
-                <input type="text" id="title" placeholder="" required="" name="title">
+                <input type="text" id="title" placeholder="" required="" name="title" value="{{ song.title }}">
               </div>Album of the song...
               <div class="col-lg-8">
-                <input type="text" id="album" placeholder="" required="" name="album">
-              </div>Choose a mood (press ctrl to choose multiple) ...
+                <input type="text" id="album" placeholder="" required="" name="album" value="{{ song.album }}">
+              </div>Choose a mood (press ctrl to choose multiple) ...  
               <div class="col-lg-4">
 
                   
                   <select name="tags" id="tags" multiple>
-                    <option value="happy">Happy</option>
-                    <option value="sad">Sad</option>
-                    <option value="classical">Classical</option>
-                    <option value="romantic">Romantic</option>
+                    <option value="happy" {% if song.tags == 'happy' %}selected{% endif %}>Happy</option>
+                    <option value="sad" {% if song.tags == 'sad' %}selected{% endif %}>Sad</option>
+                    <option value="classical" {% if song.tags == 'classical' %}selected{% endif %}>Classical</option>
+                    <option value="romantic" {% if song.tags == 'romantic' %}selected{% endif %}>Romantic</option>
                   </select>
                   <br><br><br>
 
                 
-              </div>Upload cover photo of the song...
-              <div class="col-lg-6">
-                <input type="file" id="cover" placeholder="" required="" name="image">
-              </div>
+       
               <div class="col-lg-6">
                 <button>Update</button>
                 <button style="background-color:red; color: white;">Delete</button>
@@ -53,4 +62,29 @@
       </div>
     </div>
   </section>
+  <script>
+    document.getElementById("files").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+
+document.getElementById("file").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("soundPlayer").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+  </script>
   {% include 'main/footer.html' %}

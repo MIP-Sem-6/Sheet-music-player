@@ -102,25 +102,43 @@ def add_song_form(request):
         u = request.user
 
         Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
+        return redirect('index')
 
 
 
-    return render(request,'main/_song_form.html')
+    return render(request,'main/add_song_form.html')
 
-def update_song_form(request):
+def update_song_form(request,id):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
+    getSong = Song.objects.get(id=id)
+
     if request.method == 'POST':
-        filename =request.FILES['file']
         title =request.POST.get("title")
         album =request.POST.get("album")
-        img =request.FILES["image"]
         tags =request.POST.get("tags")
         u = request.user
+        try:
+            filename =request.FILES['file']
+            getSong.file = filename
+        except:
+            pass
+        try:
+            img =request.FILES["image"]
+            getSong.cover_image = img
+        except:
+            pass
 
-        Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
+        getSong.title = title
+        getSong.album = album
+        getSong.tags = tags
+        getSong.save()
 
+        return redirect('index')
 
+    context = {
+        'song' : getSong,
+    }
 
-    return render(request,'main/update_song_form.html')
+    return render(request,'main/update_song_form.html',context)

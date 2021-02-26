@@ -58,6 +58,13 @@
                       fa-heart  {% else %} fa-heart-o {% endif %}
                       animate__bounce " aria-hidden="true" ></i> </span>
 
+                      {% if obj.user == request.user %}
+
+                      <a href="{% url 'update_song_form' obj.id %}"><i class="fa fa-edit song-update"></i></a>
+                       <a href="#"><i class="fa fa-ban song-delete"></i></a></div>
+
+                      {% endif %}
+
                       <audio controls controls id="soundPlayer" onplay="sendCount({{obj.id}});">
                         <source src="{{ obj.file.url }}" type="audio/mpeg">
                     </audio>
