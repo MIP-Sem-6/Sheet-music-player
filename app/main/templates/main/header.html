@@ -2,171 +2,86 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sheet music player</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="{% static 'main/fonts/font-awesome/css/font-awesome.min.css' %}">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+<head>
 
-    <link rel="stylesheet" href="{% static 'main/styles/bootstrap.css'%}" />
-    <link rel="stylesheet" href="{% static 'main/styles/main.css'%}" />
-    <link rel="stylesheet" href="{% static 'main/styles/custom.css'%}" />
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script src="semantic/dist/semantic.min.js"></script>
-  </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-  <body>
-    
-    <!-- Preloader  -->
-    <div id="js-preloader" class="js-preloader">
-      <div class="content">
-        <img src="{% static 'main/images/logo-icon.png' %}" alt="">
-      </div>
-      <div class="preloader-inner">
-      </div>
+    <title>{{ title }}</title>
+<!--
+
+Lava Landing Page
+
+https://templatemo.com/tm-540-lava-landing-page
+
+-->
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/assets/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/assets/css/templatemo-lava.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/assets/css/owl-carousel.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/mycustom.css' %}">
+
+
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
+    <!-- ***** Preloader End ***** -->
 
-    <!-- Mobile Menu -->
-    <div class="mobile-nav-wrapper">
-      <div class="mobile-menu-inner">
-        <ul class="mobile-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li class="has-sub"><a href="#">Pages <i class="sub-icon fa fa-angle-down"></i></a>
-            <ul class="sub-menu">
-              <li><a href="about-us.html">About Us</a></li>
-              <li><a href="our-team.html">Our Team</a></li>
-              <li><a href="pricing-plans.html">Pricing Plans</a></li>
-              <li><a href="testimonials.html">Testimonials</a></li>
-              <li><a href="error-page.html">404 Error Page</a></li>
-              <li><a href="page-headings.html">Page Headings</a></li>
-              <li><a href="page-headings.html"></a></li>
-            </ul>
-          </li>
-          <li class="has-sub"><a href="#">Portfolio <i class="sub-icon fa fa-angle-down"></i></a>
-            <ul class="sub-menu">
-              <li><a href="portfolio-v1.html">Portfolio Version 1</a></li>
-              <li><a href="portfolio-v2.html">Portfolio Version 2</a></li>
-              <li><a href="portfolio-v3.html">Portfolio Version 3</a></li>
-              <li><a href="single-project.html">Single Project</a></li>
-            </ul>
-          </li>
-          <li class="has-sub"><a href="#">Blog Entries <i class="sub-icon fa fa-angle-down"></i></a>
-            <ul class="sub-menu">
-              <li><a href="blog-v1.html">Blog Version 1</a></li>
-              <li><a href="blog-v2.html">Blog Version 2</a></li>
-              <li><a href="blog-v3.html">Blog Version 3</a></li>
-              <li><a href="single-post.html">Single Post</a></li>
-            </ul>
-          </li>
-          <li class="has-sub"><a href="#">Shop <i class="sub-icon fa fa-angle-down"></i></a>
-            <ul class="sub-menu">
-              <li><a href="our-shop.html">Our Products</a></li>
-              <li><a href="single-product.html">Single Product</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mobile-menu-overlay"></div>
-
-    <!-- Header -->
-    <header class="site-header fixed-header">
-      <div class="container expanded">
-        <div class="header-wrap">
-         <!-- <div class="fixed-header-logo">
-            <a href="index.html"><img src="{% static 'main/images/logo-white.png'%}" alt=""></a>
-          </div> -->
-          <div class="is-fixed-header-logo">
-            <a href="index.html"><img src="{% static 'main/images/logo.png'%}" alt=""></a>
-          </div> 
-          <div class="header-nav">
-              <ul class="main-menu">
-                <li><a href="{% url 'index' %}">Home</a></li>
-                <li><a href="{% url 'fav' %}">Favourites</a></li>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
-                <li><a href="services.html">Scan & play</a></li>
-                <li><a href="services.html">Share</a></li>
-                <li><a href="services.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-              </ul>    
-          </div>
-          <div class="header-widgets">
-            <ul class="right-menu">
-              <li class="menu-item menu-search">
-                <a href="#search" id="menu-search-btn">
-                  <i class="fa fa-search"></i>
-                </a>
-              </li>
-              <li class="menu-item free-quote">
-                <div class="main-pink-button">
-                  <a href="{% url 'logout' %}">Log out</a>
+      <!-- ***** Header Area Start ***** -->
+      <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'index'%}" class="logo">
+                            SES
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'index'%}">Home</a></li>
+                            <li ><a href="#" >Add Song</a>
+                                <li ><a href="#" >Favourites</a>
+                            </li>
+                            <li class="scroll-to-section"><a href="#">My Songs</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Account</a>
+                                <ul>
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Log out</a></li>
+                                </ul>
+                            </li>
+                            
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
                 </div>
-              </li>
-              <li class="menu-item menu-mobile-nav">
-                <a href="#" class="menu-bar" id="menu-show-mobile-nav">
-                  <span class="hamburger"></span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- Header -->
-    
-    <!-- Search -->
-    <div id="search">
-      <button type="button" class="close">×</button>
-        <div>
-            <input type="search" value="" placeholder="Type to search..." required="">
-            <button type="submit" class="primary-button"><i class="fa fa-search"></i></button>
-        </div>
-    </div>
-
-    <div class="main-content">
-      
-      <!-- Main Banner -->
-      <div class="parallax-banner">
-        <!--Content before waves-->
-        <div class="inner-header">
-          <div class="inner-content">
-            <h1>Sheet Music Player</h1>
-            <div class="main-decoration">
-              <img src="{% static 'images/baner-main-decoration.png' %}" alt="">
             </div>
-          </div>
         </div>
-
-        <!--Waves Container-->
-        <div>
-          <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-          <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-          </defs>
-          <g class="parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-          </g>
-          </svg>
-        </div>
-        <!--Waves end-->
-      </div>
-
-   
-   
+    </header>
+    <div style="margin-top: 100px;">
+        {% include 'users/messages.html' %}
+    </div>
+    

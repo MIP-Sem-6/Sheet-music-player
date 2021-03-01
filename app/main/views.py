@@ -36,7 +36,7 @@ def index(request):
     context = {
         'my_songs' : trending_songs,
     }
-    return render(request,'main/home.html',context)
+    return render(request,'main/index.html',context)
 
 def profile(request):
     if not request.user.is_authenticated:
