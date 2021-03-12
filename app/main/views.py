@@ -89,7 +89,7 @@ def logout_view(request):
     return redirect('signin') 
 
 
-def add_song_form(request):
+def add_song(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
@@ -106,7 +106,7 @@ def add_song_form(request):
 
 
 
-    return render(request,'main/add_song_form.html')
+    return render(request,'main/add_song.html')
 
 def update_song_form(request,id):
     if not request.user.is_authenticated:

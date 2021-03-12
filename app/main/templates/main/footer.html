@@ -156,6 +156,24 @@
     $(sid).addClass("fa-heart");
     console.log('liked');
   
+    console.log("Step 1");
+ $(document).ready(function(){
+              
+             $('#upload-file').change(function() {
+                var filename = $(this).val();
+                console.log("Step 1");
+                $('#file-upload-name').html(filename);
+                if(filename!=""){
+                    setTimeout(function(){
+                        $('.upload-wrapper').addClass("uploaded");
+                    }, 600);
+                    setTimeout(function(){
+                        $('.upload-wrapper').removeClass("uploaded");
+                        $('.upload-wrapper').addClass("success");
+                    }, 1600);
+                }
+            });
+        });
   }  
 </script>
 {% endblock %}

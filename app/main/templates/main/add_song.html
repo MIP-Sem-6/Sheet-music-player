@@ -1,0 +1,453 @@
+{% include 'main/header.html' %}
+{% load static %}
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+*{
+    box-sizing: border-box;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+.main-wrapper {
+    max-width: 1170px;
+    
+    text-align: center;
+    padding-left: 25%;
+}
+.upload-main-wrapper{
+    width: 220px;
+    margin: 0 auto;
+    
+}
+#file-upload-name{
+    margin: 4px 0 0 0;
+    font-size: 12px;
+}
+.upload-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 40px auto 0;
+    position: relative;
+    cursor: pointer;
+    background-color: #f4813f;
+    padding: 8px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.2s linear all;
+    color: #ffffff;
+    padding: 5%
+}
+.upload-wrapper input[type="file"] {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+.upload-wrapper > svg {
+    width: 50px;
+    height: auto;
+    cursor: pointer;
+}
+.upload-wrapper.success > svg{
+    transform: translateX(-200px);
+}
+.upload-wrapper.uploaded {
+    transition: 0.2s linear all;
+    width: 60px;
+    border-radius: 50%;
+    height: 60px;
+    text-align: center;
+}
+.upload-wrapper .file-upload-text {
+    position: absolute;
+    left: 80px;
+    opacity: 1;
+    visibility: visible;
+    transition: 0.2s linear all;
+}
+.upload-wrapper.uploaded .file-upload-text {
+    text-indent: -999px;
+    margin: 0;
+}
+.file-success-text {
+    opacity: 0;
+    transition: 0.2s linear all;
+    visibility: hidden;
+    transform: translateX(200px);
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.file-success-text svg {
+    width: 25px;
+    height: auto;
+}
+.file-success-text span{
+   margin-left: 15px;
+}
+.upload-wrapper.success .file-success-text{
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+.upload-wrapper.success.uploaded .file-success-text{
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+.upload-wrapper.success.uploaded .file-success-text span{
+    display: none;
+}
+.upload-wrapper .file-success-text circle{
+	  stroke-dasharray: 380;
+    stroke-dashoffset: 380;
+    transition: 1s linear all;
+    transition-delay: 1.4s;
+}
+.upload-wrapper.success .file-success-text  circle {
+	stroke-dashoffset: 0;
+}
+.upload-wrapper .file-success-text polyline {
+	stroke-dasharray: 380;
+	stroke-dashoffset: 380;
+	transition: 1s linear all;
+	transition-delay: 2s;
+}
+.upload-wrapper.success .file-success-text polyline {
+    stroke-dashoffset: 0;
+}
+.upload-wrapper.success .file-upload-text{
+    -webkit-animation-name: bounceOutLeft;
+    animation-name: bounceOutLeft;
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+[x-cloak] {
+  display: none;
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #333;
+}
+
+.svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
+
+@-webkit-keyframes bounceOutLeft {
+    20% {
+        opacity: 1;
+        -webkit-transform: translate3d(20px, 0, 0);
+        transform: translate3d(20px, 0, 0);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(-2000px, 0, 0);
+        transform: translate3d(-2000px, 0, 0);
+    }
+}
+
+@keyframes bounceOutLeft {
+    20% {
+        opacity: 1;
+        -webkit-transform: translate3d(20px, 0, 0);
+        transform: translate3d(20px, 0, 0);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(-2000px, 0, 0);
+        transform: translate3d(-2000px, 0, 0);
+    }
+}
+</style>
+
+
+<footer id="contact-us">
+    <div class="container">
+        <div class="footer-content">
+            <div class="row">
+                <!-- ***** Contact Form Start ***** -->
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                            <div class="row">
+                              <div class="main-wrapper">
+                                <div class="upload-main-wrapper">
+                                        <div class="upload-wrapper">
+                                                <input type="file" id="upload-file">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
+                                                <span class="file-upload-text">Upload Song</span>
+                                                <div class="file-success-text">
+                                                 <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="0 0 100 100"  xml:space="preserve">
+                                        <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
+                                        <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                                            27.114,51 41.402,65.288 72.485,34.205 "/>
+                                        </svg> <span>Successfully</span></div>
+                                            </div>
+                                            <p id="file-upload-name"></p>
+                                </div>
+                            </div>
+                                <div class="col-md-6 col-sm-12"></div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <input name="title" type="text" id="title" placeholder="Title of the song"
+                                            required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                  <fieldset>
+                                    <input name="album" type="text" id="album" placeholder="Album of the song"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                  <select x-cloak id="select">
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                    <option value="4">Option 4</option>
+                                    <option value="5">Option 5</option>
+                                    <option value="6">Option 6</option>
+                                    <option value="7">Option 7</option>
+                                    <option value="8">Option 8</option>
+                                  </select>
+                                  
+                                  <div x-data="dropdown()" x-init="loadOptions()" class="w-full md:w-1/2 flex flex-col items-center h-64 mx-auto">
+                                    <input name="values" type="hidden" x-bind:value="selectedValues()">
+                                    <div class="inline-block relative w-64">
+                                      <div class="flex flex-col items-center relative">
+                                        <div x-on:click="open" class="w-full">
+                                          <div class="my-2 p-1 flex border border-gray-200 bg-white rounded">
+                                            <div class="flex flex-auto flex-wrap">
+                                              <template x-for="(option,index) in selected" :key="options[option].value">
+                                                <div class="flex justify-center items-center m-1 font-medium py-1 px-1 bg-white rounded bg-gray-100 border">
+                                                  <div class="text-xs font-normal leading-none max-w-full flex-initial x-model=" options[option] x-text="options[option].text"></div>
+                                                  <div class="flex flex-auto flex-row-reverse">
+                                                    <div x-on:click.stop="remove(index,option)">
+                                                      <svg class="fill-current h-4 w-4 " role="button" viewBox="0 0 20 20">
+                                                        <path d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
+                                                                             c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                                                             l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                                                             C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                      </svg>
+                                  
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </template>
+                                              <div x-show="selected.length == 0" class="flex-1">
+                                                <input placeholder="Select a option" class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800" x-bind:value="selectedValues()">
+                                              </div>
+                                            </div>
+                                            <div class="text-gray-300 w-8 py-1 pl-2 pr-1 border-l flex items-center border-gray-200 svelte-1l8159u">
+                                  
+                                              <button type="button" x-show="isOpen() === true" x-on:click="open" class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                                                <svg version="1.1" class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                                                  <path d="M17.418,6.109c0.272-0.268,0.709-0.268,0.979,0s0.271,0.701,0,0.969l-7.908,7.83
+                                    c-0.27,0.268-0.707,0.268-0.979,0l-7.908-7.83c-0.27-0.268-0.27-0.701,0-0.969c0.271-0.268,0.709-0.268,0.979,0L10,13.25
+                                    L17.418,6.109z" />
+                                                </svg>
+                                  
+                                              </button>
+                                              <button type="button" x-show="isOpen() === false" @click="close" class="cursor-pointer w-6 h-6 text-gray-600 outline-none focus:outline-none">
+                                                <svg class="fill-current h-4 w-4" viewBox="0 0 20 20">
+                                                  <path d="M2.582,13.891c-0.272,0.268-0.709,0.268-0.979,0s-0.271-0.701,0-0.969l7.908-7.83
+                                    c0.27-0.268,0.707-0.268,0.979,0l7.908,7.83c0.27,0.268,0.27,0.701,0,0.969c-0.271,0.268-0.709,0.268-0.978,0L10,6.75L2.582,13.891z
+                                    " />
+                                                </svg>
+                                  
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="w-full px-4">
+                                          <div x-show.transition.origin.top="isOpen()" class="absolute shadow top-100 bg-white z-40 w-full left-0 rounded max-h-select" x-on:click.away="close">
+                                            <div class="flex flex-col w-full overflow-y-auto h-64">
+                                              <template x-for="(option,index) in options" :key="option" class="overflow-auto">
+                                                <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-gray-100" @click="select(index,$event)">
+                                                  <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
+                                                    <div class="w-full items-center flex justify-between">
+                                                      <div class="mx-2 leading-6" x-model="option" x-text="option.text"></div>
+                                                      <div x-show="option.selected">
+                                                        <svg class="svg-icon" viewBox="0 0 20 20">
+                                                          <path fill="none" d="M7.197,16.963H7.195c-0.204,0-0.399-0.083-0.544-0.227l-6.039-6.082c-0.3-0.302-0.297-0.788,0.003-1.087
+                                                C0.919,9.266,1.404,9.269,1.702,9.57l5.495,5.536L18.221,4.083c0.301-0.301,0.787-0.301,1.087,0c0.301,0.3,0.301,0.787,0,1.087
+                                                L7.741,16.738C7.596,16.882,7.401,16.963,7.197,16.963z"></path>
+                                                        </svg>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </template>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="main-wrapper">
+                                  <div class="upload-main-wrapper">
+                                          <div class="upload-wrapper">
+                                                  <input type="file" id="upload-file">
+                                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
+                                                  <span class="file-upload-text">Upload Cover Photo</span>
+                                                  <div class="file-success-text">
+                                                   <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                              viewBox="0 0 100 100"  xml:space="preserve">
+                                          <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
+                                          <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                                              27.114,51 41.402,65.288 72.485,34.205 "/>
+                                          </svg> <span>Successfully</span></div>
+                                              </div>
+                                              <p id="file-upload-name"></p>
+                                  </div>
+                              </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="main-button">Submit</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- ***** Contact Form End ***** -->
+                <div class="right-content col-lg-6 col-md-12 col-sm-12">
+                    <h2>Add New Song</h2>
+                    <p>Fill out this form to get started now!</p>
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sub-footer">
+                    <p>Copyright &copy; 2020 Lava Landing Page
+
+                    | Designed by <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'main/assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'main/assets/js/popper.js' %}"></script>
+    <script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'main/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'main/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/imgfix.min.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'main/assets/js/custom.js' %}"></script>
+    <script>
+      console.log("Step 1");
+       $(document).ready(function(){
+                    
+                   $('#upload-file').change(function() {
+                      var filename = $(this).val();
+                      console.log("Step 1");
+                      filename=filename.substring(12);
+                      $('#file-upload-name').html(filename);
+                      
+                      console.log(filename);
+                      if(filename!=""){
+                          setTimeout(function(){
+                              $('.upload-wrapper').addClass("uploaded");
+                          }, 600);
+                          setTimeout(function(){
+                              $('.upload-wrapper').removeClass("uploaded");
+                              $('.upload-wrapper').addClass("success");
+                          }, 1600);
+                      }
+                  });
+              });
+              function dropdown() {
+                return {
+                    options: [],
+                    selected: [],
+                    show: false,
+                    open() { this.show = true },
+                    close() { this.show = false },
+                    isOpen() { return this.show === true },
+                    select(index, event) {
+
+                        if (!this.options[index].selected) {
+
+                            this.options[index].selected = true;
+                            this.options[index].element = event.target;
+                            this.selected.push(index);
+
+                        } else {
+                            this.selected.splice(this.selected.lastIndexOf(index), 1);
+                            this.options[index].selected = false
+                        }
+                    },
+                    remove(index, option) {
+                        this.options[option].selected = false;
+                        this.selected.splice(index, 1);
+
+
+                    },
+                    loadOptions() {
+                        const options = document.getElementById('select').options;
+                        for (let i = 0; i < options.length; i++) {
+                            this.options.push({
+                                value: options[i].value,
+                                text: options[i].innerText,
+                                selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                            });
+                        }
+
+
+                    },
+                    selectedValues(){
+                        return this.selected.map((option)=>{
+                            return this.options[option].value;
+                        })
+                    }
+                }
+            }
+      </script>
+
+      </body>
+      </html>
+
