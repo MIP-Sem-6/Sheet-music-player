@@ -60,7 +60,7 @@ https://templatemo.com/tm-540-lava-landing-page
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="{% url 'index'%}">Home</a></li>
-                            <li ><a href="#" >Add Song</a>
+                            <li ><a href="{% url 'add_song' %}" >Add Song</a>
                                 <li ><a href="#" >Favourites</a>
                             </li>
                             <li class="scroll-to-section"><a href="#">My Songs</a></li>
@@ -68,7 +68,7 @@ https://templatemo.com/tm-540-lava-landing-page
                                 <a href="javascript:;">Account</a>
                                 <ul>
                                     <li><a href="#">Profile</a></li>
-                                    <li><a href="#">Log out</a></li>
+                                    <li><a href="{% url 'logout' %}">Log out</a></li>
                                 </ul>
                             </li>
                             

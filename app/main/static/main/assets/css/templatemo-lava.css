@@ -999,7 +999,7 @@ footer .footer-content {
 
 .contact-form {
   position: relative;
-  z-index: 10;
+  z-index: 100;
   padding: 45px;
   border-radius: 5px;
   background-color: #fff;
@@ -1018,15 +1018,18 @@ footer .right-content {
   border: 1px solid #eee;
   background-color: #f7f7f7;
   border-radius: 5px;
-  width: 100%;
   height: 50px;
   outline: none;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+.input-style {
+  width: 100%;
   padding-left: 20px;
   padding-right: 20px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  margin-bottom: 30px;
 }
 
 .contact-form textarea {
