@@ -108,37 +108,56 @@ def add_song(request):
 
     return render(request,'main/add_song.html')
 
-def update_song_form(request,id):
+# def update_song_form(request,id):
+#     if not request.user.is_authenticated:
+#         return redirect('errorpage')
+
+#     getSong = Song.objects.get(id=id)
+
+#     if request.method == 'POST':
+#         title =request.POST.get("title")
+#         album =request.POST.get("album")
+#         tags =request.POST.get("tags")
+#         u = request.user
+#         try:
+#             filename =request.FILES['file']
+#             getSong.file = filename
+#         except:
+#             pass
+#         try:
+#             img =request.FILES["image"]
+#             getSong.cover_image = img
+#         except:
+#             pass
+
+#         getSong.title = title
+#         getSong.album = album
+#         getSong.tags = tags
+#         getSong.save()
+
+#         return redirect('index')
+
+#     context = {
+#         'song' : getSong,
+#     }
+
+#     return render(request,'main/update_song_form.html',context)
+
+def update_song(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
-    getSong = Song.objects.get(id=id)
-
     if request.method == 'POST':
+        filename =request.FILES['file']
         title =request.POST.get("title")
         album =request.POST.get("album")
+        img =request.FILES["image"]
         tags =request.POST.get("tags")
         u = request.user
-        try:
-            filename =request.FILES['file']
-            getSong.file = filename
-        except:
-            pass
-        try:
-            img =request.FILES["image"]
-            getSong.cover_image = img
-        except:
-            pass
 
-        getSong.title = title
-        getSong.album = album
-        getSong.tags = tags
-        getSong.save()
-
+        Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
         return redirect('index')
 
-    context = {
-        'song' : getSong,
-    }
 
-    return render(request,'main/update_song_form.html',context)
+
+    return render(request,'main/update_song.html')
