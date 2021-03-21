@@ -58,17 +58,18 @@ $(document).ready(function () {
   
   <div class="row" style="text-align: center;">
       {% for ob in my_songs %}
-      <div class="col-md-6 col-sm-6 col-lg-4 col-xs-6">
+      <div class="col-md-6 col-sm-6 col-lg-3 col-xs-6">
     <div class="card" style="width: 18rem;">
         <img src="{{ ob.cover_image.url }}" class="card-img-top" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ ob.title }}</h5>
-          <p class="card-text">{{ ob.user }}</p>
+          <p class="card-text"> Artist : {{ ob.artist }}</p>
+          <p class="card-text"> Uploaded by : {{ ob.user }}</p>
         </div>
         <p class="card-text">{{ ob.album }}</p>
         {% if ob.user == request.user %}
 
-        <a href="{% url 'update_song' %}"><i class="fa fa-edit song-update"></i></a>
+        <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
          <a href="#"><i class="fa fa-ban song-delete"></i></a></div>
 
         {% endif %}
@@ -95,12 +96,11 @@ $(document).ready(function () {
 
         <link href="https://firebasestorage.googleapis.com/v0/b/tooltipcss.appspot.com/o/tooltip.css?alt=media&token=0ce443aa-0970-4167-8d7d-7abdcd2edf71" rel="stylesheet">
 
-          <audio controls controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+          <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
             <source src="{{ ob.file_name.url }}" type="audio/mpeg">
         </audio>
 
-        {{ ob.file_name.url }}
-        {{ ob.cover_image.url }}
+
 
         </div>
       </div>

@@ -21,7 +21,6 @@ class Song(models.Model):
                 return True
         return False
 
-
     def __str__(self):
         return f'{self.user} {self.title} {self.album}'
     

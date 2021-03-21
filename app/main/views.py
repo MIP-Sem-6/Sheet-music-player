@@ -92,6 +92,35 @@ def fav(request):
     }
     return render(request,'main/fav.html',context)
 
+def my_songs(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    my_songs = Song.objects.all()
+    my_songs = my_songs.filter(user=request.user)
+
+    if 'subscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.add(request.user)
+        messages.success(request,f'Added to favourites!')
+        print(f'{request.user} liked {fs.title}')
+        return redirect('index')
+    
+    if 'unsubscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.remove(request.user)
+        messages.success(request,f'Removed from favourites!')
+        print(f'{request.user} unliked {fs.title}')
+        return redirect('index')
+
+
+    context = {
+        'my_songs' : my_songs,
+    }
+    return render(request,'main/my_songs.html',context)
+
 
 def logout_view(request):
     if not request.user.is_authenticated:
@@ -111,6 +140,7 @@ def add_song(request):
         title =request.POST.get("title")
         album =request.POST.get("album")
         rock =request.POST.get("rock")
+        artist =  request.POST.get("artist")
         if(rock):
             st += rock + ' '
         inspiration =request.POST.get("inspiration")
@@ -137,13 +167,13 @@ def add_song(request):
         try:
             img =request.FILES["image"]
             if(img):
-                Song.objects.create(file_name=filename,title=title,album=album,user=u,tags=st,cover_image=img).save()
+                Song.objects.create(file_name=filename,artist=artist,title=title,album=album,user=u,tags=st,cover_image=img).save()
                 messages.success(request,f'Song added successfully!')
                 return redirect('index')
         except:
             pass
 
-        Song.objects.create(file=filename,title=title,album=album,user=u,tags=st).save()
+        Song.objects.create(file_name=filename,artist=artist,title=title,album=album,user=u,tags=st).save()
         messages.success(request,f'Song added successfully!')
         return redirect('index')
 
@@ -186,21 +216,13 @@ def add_song(request):
 
 #     return render(request,'main/update_song_form.html',context)
 
-def update_song(request):
+def update_song(request,id):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
-    if request.method == 'POST':
-        filename =request.FILES['file']
-        title =request.POST.get("title")
-        album =request.POST.get("album")
-        img =request.FILES["image"]
-        tags =request.POST.get("tags")
-        u = request.user
+    getSong = Song.objects.get(id=id)
 
-        Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
-        return redirect('index')
-
-
-
-    return render(request,'main/update_song.html')
+    context = {
+        'song' : getSong,
+    }
+    return render(request,'main/update_song.html',context)
