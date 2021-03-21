@@ -1,77 +1,389 @@
 {% include 'main/header.html' %}
 {% load static %}
-
-<style>
-  .case-item {
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-background-color: rgb(236, 233, 233);
-}
-
-.case-item:hover {
-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-</style>
+{% load define_action %}
 
 
-<li class="menu-item free-quote">
-    <div class="main-pink-button">
-      <a href="#!" role="button" data-toggle="modal" data-target="#exampleModalLong">Add Music</a>
+    <!-- ***** Header Area End ***** -->
+
+<!-- {% if tab == 1 %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+    // Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#about').offset().top
+    }, 'slow');
+});
+</script>
+{% endif %} -->
+
+
+    
+
+    <div class="row">
+      <div class="col-12 pageheading">
+          <div class="page-title">Favourites</div>
+          <div class="subh">All your favourite songs at one place!</div>
+      </div>
+  </div>
+
+  
+  <div class="row" style="text-align: center;">
+      {% for ob in my_songs %}
+      <div class="col-md-6 col-sm-6 col-lg-4 col-xs-6">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ ob.cover_image.url }}" class="card-img-top" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ ob.title }}</h5>
+          <p class="card-text">{{ ob.user }}</p>
+        </div>
+        <p class="card-text">{{ ob.album }}</p>
+        {% if ob.user == request.user %}
+
+        <a href="{% url 'update_song' %}"><i class="fa fa-edit song-update"></i></a>
+         <a href="#"><i class="fa fa-ban song-delete"></i></a></div>
+
+        {% endif %}
+        <div class="card-body">
+        <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br>
+
+        
+        <form method="POST">
+            {% csrf_token %}
+
+            <input style="visibility: hidden;" name="songid" type="number" value="{{ob.id}}">
+
+        {% if ob|get_liked:request.user == True %}
+
+        <button name="unsubscribe"> 
+            <span class="info"><i class="fa fa-heart" style="padding-right: 5px;" > </i> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+        </button>
+        {% else %}
+        <button name="subscribe"> 
+            <span class="info"><i class="fa fa-heart-o" style="padding-right: 5px;" > </i> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+        </button>
+        {% endif %}
+        </form>
+
+        <link href="https://firebasestorage.googleapis.com/v0/b/tooltipcss.appspot.com/o/tooltip.css?alt=media&token=0ce443aa-0970-4167-8d7d-7abdcd2edf71" rel="stylesheet">
+
+          <audio controls controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+            <source src="{{ ob.file.url }}" type="audio/mpeg">
+        </audio>
+        </div>
+      </div>
+      </div>
+      {% endfor %}
+  </div>
+
+
+
+    <!-- ***** Features Big Item Start ***** -->
+    <section class="section" id="about">
+      <div class="container">
+  
+ 
+
+
+    <!-- ***** Testimonials Starts ***** -->
     </div>
-  </li>
-  
-  
-        <!-- Recent Cases -->
-        <section class="recent-cases">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="section-heading">
-                  <h6>All your liked compositions now available at one place</h6>
-                  <h2>Favourites</h2>
-                </div>
-              </div>
-              <div class="col-lg-8">
-                <div class="portfolio-filters">
-                  <ul>
-                      <li class="active" data-filter="*">Show All</li>
-                      <li data-filter=".category-analysis">Happy</li>
-                      <li data-filter=".category-digital">Classical</li>
-                      <li data-filter=".category-seo">Romantic</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="row masonry-layout filters-content normal-col-gap">
-                  {% for obj in my_songs %}
-                <div class="col-lg-4 masonry-item all category-analysis">
-                  <div class="case-item">
-                    <a href="single-project.html">
-                    <div class="case-thumb">
-                      <img src="{{ obj.cover_image.url }}" alt="">
-                    </div>
-                    <div class="down-content">
-                      <h4>{{ obj.title }}</h4>
-                      <span>{{ obj.user.username }}</span> 
-                      <audio controls id="soundPlayer">
-                        <source src="{{ obj.file.url }}" type="audio/mpeg">
-                    </audio>
-                    </div>
-                    </a>
-                  </div>
-                </div>
-                {% endfor %}
-             
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="main-purple-button">
-                  <a href="portfolio-v1.html">View All Cases</a>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>  </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Testimonials Ends ***** -->
+
+
+    <!-- ***** Footer Start ***** -->
+    <footer id="contact-us">
+        <div class="container">
+           
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sub-footer">
+                        <p>Copyright &copy; Coffee n Code</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block javascript %}
+
+<script>
+
+  let c = 1;
   
-        {% include 'main/footer.html' %}
+  function sendCount(id) {
+  $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'count': c,
+        'id':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+
+  }
+
+  function favButton(id,flag)
+  {
+    let sid = "#heart"+String(id);
+
+    if (flag=="True")
+    {
+      console.log('unliked');
+
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'remove_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+    $(sid).removeClass("fa-heart");
+    $(sid).addClass("fa-heart-o");
+    }
+    else{
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'add_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+
+    }
+    $(sid).removeClass("fa-heart-o");
+    $(sid).addClass("fa-heart");
+    console.log('liked');
+  
+    console.log("Step 1");
+ $(document).ready(function(){
+              
+             $('#upload-file').change(function() {
+                var filename = $(this).val();
+                console.log("Step 1");
+                $('#file-upload-name').html(filename);
+                if(filename!=""){
+                    setTimeout(function(){
+                        $('.upload-wrapper').addClass("uploaded");
+                    }, 600);
+                    setTimeout(function(){
+                        $('.upload-wrapper').removeClass("uploaded");
+                        $('.upload-wrapper').addClass("success");
+                    }, 1600);
+                }
+            });
+        });
+  }  
+</script>
+{% endblock %}
+
+    <!-- jQuery -->
+    <script src="{% static 'main/assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'main/assets/js/popper.js' %}"></script>
+    <script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'main/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'main/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/imgfix.min.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'main/assets/js/custom.js' %}"></script>
+
+</body>
+</html>

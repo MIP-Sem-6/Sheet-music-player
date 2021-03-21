@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Song
 from django.contrib.auth import logout
+from django.contrib import messages
+
 
 # Create your views here.
 def index(request):
@@ -18,20 +20,22 @@ def index(request):
             song = Song.objects.get(id=sid)
             song.play_count = 1 + song.play_count
             song.save()
-        
-        fav_song = request.POST.get('add_fav')
-        if(fav_song):
-            fs = Song.objects.get(id=int(fav_song))
-            fs.likedby.add(request.user)
 
-        remove_song = request.POST.get('remove_fav')
-        if(remove_song):
-            rs = Song.objects.get(id=int(remove_song))
-            rs.likedby.remove(request.user)
-
-    for x in trending_songs:
-        print(x.get_is_liked(request.user))
-
+    if 'subscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.add(request.user)
+        messages.success(request,f'Added to favourites!')
+        print(f'{request.user} liked {fs.title}')
+        return redirect('index')
+    
+    if 'unsubscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.remove(request.user)
+        messages.success(request,f'Removed from favourites!')
+        print(f'{request.user} unliked {fs.title}')
+        return redirect('index')
 
     context = {
         'my_songs' : trending_songs,
@@ -66,19 +70,27 @@ def fav(request):
     my_songs = Song.objects.all()
     my_songs = my_songs.filter(likedby=request.user)
 
-    if request.is_ajax():
-        count =request.POST.get('count')
-        sid =request.POST.get('id')
-        if int(count) == 1:
-            sid = int(sid)
-            song = Song.objects.get(id=sid)
-            song.play_count = 1 + song.play_count
-            song.save()
+    if 'subscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.add(request.user)
+        messages.success(request,f'Added to favourites!')
+        print(f'{request.user} liked {fs.title}')
+        return redirect('index')
+    
+    if 'unsubscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.remove(request.user)
+        messages.success(request,f'Removed from favourites!')
+        print(f'{request.user} unliked {fs.title}')
+        return redirect('index')
+
 
     context = {
         'my_songs' : my_songs,
     }
-    return render(request,'main/profile.html',context)
+    return render(request,'main/fav.html',context)
 
 
 def logout_view(request):
@@ -94,14 +106,45 @@ def add_song(request):
         return redirect('errorpage')
 
     if request.method == 'POST':
+        st = ''
         filename =request.FILES['file']
         title =request.POST.get("title")
         album =request.POST.get("album")
-        img =request.FILES["image"]
-        tags =request.POST.get("tags")
+        rock =request.POST.get("rock")
+        if(rock):
+            st += rock + ' '
+        inspiration =request.POST.get("inspiration")
+        if(inspiration):
+            st += inspiration + ' '
+        dance =request.POST.get("dance")
+        if(dance):
+            st += dance + ' '
+        happy =request.POST.get("happy")
+        if(happy):
+            st += happy + ' '
+        sad =request.POST.get("sad")
+        if(sad):
+            st += sad + ' '
+        classical =request.POST.get("classical")
+        if(classical):
+            st += classical + ' '
+        romantic =request.POST.get("romantic")
+        if(romantic):
+            st += romantic + ' '
+        
+        print(st)
         u = request.user
+        try:
+            img =request.FILES["image"]
+            if(img):
+                Song.objects.create(file_name=filename,title=title,album=album,user=u,tags=st,cover_image=img).save()
+                messages.success(request,f'Song added successfully!')
+                return redirect('index')
+        except:
+            pass
 
-        Song.objects.create(file=filename,title=title,album=album,user=u,tags=tags,cover_image=img).save()
+        Song.objects.create(file=filename,title=title,album=album,user=u,tags=st).save()
+        messages.success(request,f'Song added successfully!')
         return redirect('index')
 
 

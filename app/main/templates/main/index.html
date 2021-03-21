@@ -1,5 +1,7 @@
 {% include 'main/header.html' %}
 {% load static %}
+{% load define_action %}
+
 
     <!-- ***** Header Area End ***** -->
 
@@ -53,17 +55,59 @@ $(document).ready(function () {
       </div>
   </div>
 
-  <div class="card" style="width: 18rem;">
-    <img src="{ % static 'main/assets/images/starboy.jpg' % }" class="card-img-top" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-    <div class="card-body">
-      <a href="#" class="card-link">Add to favourites</a>
-      <i class="fa fa-heart-o" aria-hidden="true"></i>
-    </div>
+  
+  <div class="row" style="text-align: center;">
+      {% for ob in my_songs %}
+      <div class="col-md-6 col-sm-6 col-lg-4 col-xs-6">
+    <div class="card" style="width: 18rem;">
+        <img src="{{ ob.cover_image.url }}" class="card-img-top" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ ob.title }}</h5>
+          <p class="card-text">{{ ob.user }}</p>
+        </div>
+        <p class="card-text">{{ ob.album }}</p>
+        {% if ob.user == request.user %}
+
+        <a href="{% url 'update_song' %}"><i class="fa fa-edit song-update"></i></a>
+         <a href="#"><i class="fa fa-ban song-delete"></i></a></div>
+
+        {% endif %}
+        <div class="card-body">
+        <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br>
+
+        
+        <form method="POST">
+            {% csrf_token %}
+
+            <input style="visibility: hidden;" name="songid" type="number" value="{{ob.id}}">
+
+        {% if ob|get_liked:request.user == True %}
+
+        <button name="unsubscribe"> 
+            <span class="info"><i class="fa fa-heart" style="padding-right: 5px;" > </i> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+        </button>
+        {% else %}
+        <button name="subscribe"> 
+            <span class="info"><i class="fa fa-heart-o" style="padding-right: 5px;" > </i> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+        </button>
+        {% endif %}
+        </form>
+
+        <link href="https://firebasestorage.googleapis.com/v0/b/tooltipcss.appspot.com/o/tooltip.css?alt=media&token=0ce443aa-0970-4167-8d7d-7abdcd2edf71" rel="stylesheet">
+
+          <audio controls controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+            <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+        </audio>
+
+        {{ ob.file_name.url }}
+        {{ ob.cover_image.url }}
+
+        </div>
+      </div>
+      </div>
+      {% endfor %}
   </div>
+
 
 
     <!-- ***** Features Big Item Start ***** -->
@@ -277,6 +321,84 @@ $(document).ready(function () {
             </div>
         </div>
     </footer>
+
+    {% block javascript %}
+
+<script>
+
+  let c = 1;
+  
+  function sendCount(id) {
+  $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'count': c,
+        'id':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+
+  }
+
+  function favButton(id,flag)
+  {
+    let sid = "#heart"+String(id);
+
+    if (flag=="True")
+    {
+      console.log('unliked');
+
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'remove_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+    $(sid).removeClass("fa-heart");
+    $(sid).addClass("fa-heart-o");
+    }
+    else{
+      $.ajax({
+      url: "{% url 'index' %}",
+      type: "POST",
+      data: {
+        'add_fav':id,
+        csrfmiddlewaretoken: '{{ csrf_token }}'
+      },
+      dataType: 'json'
+    });
+
+    }
+    $(sid).removeClass("fa-heart-o");
+    $(sid).addClass("fa-heart");
+    console.log('liked');
+  
+    console.log("Step 1");
+ $(document).ready(function(){
+              
+             $('#upload-file').change(function() {
+                var filename = $(this).val();
+                console.log("Step 1");
+                $('#file-upload-name').html(filename);
+                if(filename!=""){
+                    setTimeout(function(){
+                        $('.upload-wrapper').addClass("uploaded");
+                    }, 600);
+                    setTimeout(function(){
+                        $('.upload-wrapper').removeClass("uploaded");
+                        $('.upload-wrapper').addClass("success");
+                    }, 1600);
+                }
+            });
+        });
+  }  
+</script>
+{% endblock %}
 
     <!-- jQuery -->
     <script src="{% static 'main/assets/js/jquery-2.1.0.min.js' %}"></script>

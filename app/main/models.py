@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Song(models.Model):
-    file = models.FileField(upload_to='songs',blank=False,default='aot.mp3')
+    file_name = models.FileField(upload_to='songs',default='aot.mp3')
     title = models.CharField(max_length=100)
     artist = models.CharField(max_length=100,default=' ',blank=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='addedby')
