@@ -226,3 +226,11 @@ def update_song(request,id):
         'song' : getSong,
     }
     return render(request,'main/update_song.html',context)
+
+
+def account(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+   
+    return render(request,'main/account.html')

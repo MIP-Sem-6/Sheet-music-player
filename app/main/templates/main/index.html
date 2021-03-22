@@ -65,15 +65,16 @@ $(document).ready(function () {
           <h5 class="card-title">{{ ob.title }}</h5>
           <p class="card-text"> Artist : {{ ob.artist }}</p>
           <p class="card-text"> Uploaded by : {{ ob.user }}</p>
-        </div>
+        
         <p class="card-text">{{ ob.album }}</p>
         {% if ob.user == request.user %}
 
         <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
-         <a href="#"><i class="fa fa-ban song-delete"></i></a></div>
+        
+        <a href="#" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa fa-ban song-delete"></i></a>
 
         {% endif %}
-        <div class="card-body">
+        
         <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br>
 
         
