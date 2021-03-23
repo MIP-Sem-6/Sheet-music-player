@@ -11,5 +11,5 @@ urlpatterns = [
     path('add_song', views.add_song, name='add_song'),
     path('my_songs', views.my_songs, name='my_songs'),
     path('update_song/<int:id>', views.update_song, name='update_song'),
-    path('account', views.account, name='account'),
+    path('account', views.profile, name='account'),
 ]

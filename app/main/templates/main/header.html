@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="TemplateMo">
+    <link rel="shortcut icon" href="{% static 'assets/images/college.svg' %}" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>{{ title }}</title>
@@ -58,7 +59,7 @@ https://templatemo.com/tm-540-lava-landing-page
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="{% url 'index'%}" class="logo">
-                            SES
+                            <i class="fa fa-music">Smp</i><i class="fa fa-music"></i>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -71,7 +72,7 @@ https://templatemo.com/tm-540-lava-landing-page
                             <li class="submenu">
                                 <a href="javascript:;">Account</a>
                                 <ul>
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{% url 'account' %}">Profile</a></li>
                                     <li><a href="{% url 'logout' %}">Log out</a></li>
                                 </ul>
                             </li>

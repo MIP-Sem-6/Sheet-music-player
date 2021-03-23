@@ -37,6 +37,13 @@ def index(request):
         print(f'{request.user} unliked {fs.title}')
         return redirect('index')
 
+    if 'delete' in request.POST:
+        del_id = request.POST.get('songid_delete')
+        fs = Song.objects.get(id=del_id)
+        fs.delete()
+        messages.success(request,f'Song has been deleted!')
+        return redirect('index')
+
     context = {
         'my_songs' : trending_songs,
     }
@@ -61,7 +68,7 @@ def profile(request):
     context = {
         'my_songs' : my_songs,
     }
-    return render(request,'main/profile.html',context)
+    return render(request,'main/account.html',context)
 
 def fav(request):
     if not request.user.is_authenticated:
@@ -228,9 +235,3 @@ def update_song(request,id):
     return render(request,'main/update_song.html',context)
 
 
-def account(request):
-    if not request.user.is_authenticated:
-        return redirect('errorpage')
-
-   
-    return render(request,'main/account.html')
