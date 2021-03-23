@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Song
 from django.contrib.auth import logout
 from django.contrib import messages
+from users.models import Profile
 
 
 # Create your views here.
@@ -52,8 +53,14 @@ def index(request):
 def profile(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
-    my_songs = Song.objects.all()
-    my_songs = my_songs.filter(user=request.user.id)
+    songs = Song.objects.all()
+    mysongs = songs.filter(user=request.user.id)
+    favsongs = songs.filter(likedby=request.user)
+
+    song_count = len(mysongs)
+    fav_count = len(favsongs)
+
+    p = Profile.objects.get(user=request.user)
 
     if request.is_ajax():
         count =request.POST.get('count')
@@ -67,6 +74,9 @@ def profile(request):
 
     context = {
         'my_songs' : my_songs,
+        'profile':p,
+        'count_my':song_count,
+        'count_fav':fav_count,
     }
     return render(request,'main/account.html',context)
 

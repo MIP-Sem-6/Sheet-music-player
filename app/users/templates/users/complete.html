@@ -47,65 +47,67 @@
 						Sheet Music Player
                     </span> 
 
-                    
-                    
-                
+                        <div class="col-lg-6">
+           
+                            <div class="login100-form-avatar">
+                                <img src="{% static 'users/images/user.png' %}" alt="AVATAR" id="image">
+                            </div>
+                            <input type="file" id="files" name="image" />
+              
+                            </div>
 
-                        {% if page == 1 %}
+                        <span class="login100-form-title p-t-20 p-b-45">
+                            Welcome {{ request.user }}
+                        </span> 
 
-                        <div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
-                            <input class="input100" type="text" name="username" placeholder="Username">
+                        <div class="wrap-input100 validate-input m-b-10" data-validate = "Bio is required">
+                            <input class="input100" type="text" name="bio" placeholder="bio">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-user"></i>
                             </span>
                         </div>
+                        <div class="box">
+                        <p class="choose">Select your favourite genres</p>
+                        <div class="multiselect">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="dance" name="dance" >
+                                <label class="form-check-label" for="inlineCheckbox1">Dance</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="inspiration" name="inspiration">
+                                <label class="form-check-label" for="inlineCheckbox2">Inspiration</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="rock" name="rock">
+                                <label class="form-check-label" for="inlineCheckbox2">Rock</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="classical" name="classical" >
+                                <label class="form-check-label" for="inlineCheckbox2">Classical</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="romantic" name="romantic">
+                                <label class="form-check-label" for="inlineCheckbox2">Romantic</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="happy" name="happy">
+                                <label class="form-check-label" for="inlineCheckbox2">Happy</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sad" name="sad">
+                                <label class="form-check-label" for="inlineCheckbox2">Sad</label>
+                            </div>
 
-                        <div class="wrap-input100 validate-input m-b-10" data-validate = "First name is required">
-                            <input class="input100" type="text" name="fname" placeholder="First Name">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user"></i>
-                            </span>
+                        </div>
                         </div>
 
-                        <div class="wrap-input100 validate-input m-b-10" data-validate = "Last name is required">
-                            <input class="input100" type="text" name="lname" placeholder="Last name">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </div>
 
-                        <div class="wrap-input100 validate-input m-b-10" data-validate = "Email is required">
-                            <input class="input100" type="email" name="email" placeholder="Email">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </div>
-    
-                        <div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
-                            <input class="input100" type="password" name="pass" placeholder="Password">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                        </div>
-                        
-
-                        
-
-                      <div class="container-login100-form-btn p-t-10">
-						<button type="submit" name="next" class="login100-form-btn">
-							Next
-						</button>
-                        </div>
-
-                        
-
-                        {%endif%}
-
+                        <div class="container-login100-form-btn p-t-10">
+                            <button type="submit" name="submit" class="login100-form-btn">
+                                Submit
+                            </button>
+                            </div>
                         
                  
 
@@ -113,19 +115,6 @@
 
 					
 
-					<div class="text-center w-full p-t-25 p-b-23">
-						<a href="#" class="txt1">
-							Forgot Username / Password?
-                        </a>
-                        
-					</div>
-
-					<div class="text-center w-full">
-						<a class="txt1" href="{% url 'signin' %}">
-							Already have an account? Log in here.
-							<i class="fa fa-long-arrow-right"></i>						
-						</a>
-					</div>
 				</form>
 			</div>
 		</div>

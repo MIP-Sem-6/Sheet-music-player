@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from .models import Profile
 
 
 
@@ -55,16 +56,72 @@ def register(request,id,tab):
             u.first_name = fname
             u.last_name = lname
             u.save()
-            messages.success(request,f'You have successfully registered.')
-
-            return redirect('signin')
+            messages.success(request,f'You have successfully registered!')
+            user = authenticate(request, username=username, password=psw)
+            if user is not None:
+                login(request, user)
+            Profile.objects.create(user=request.user)
+            return redirect('complete')
         
         except:
             e='This username is already in use.Try again with a new one.'
             return render(request,'users/register.html',{'page':page,'e':e})
 
-        
+    print(request.user)
     return render(request,'users/register.html',{'page':page,'uname':uname})
+
+def complete(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+        
+    page = 1
+    uname = ''
+
+    if 'submit' in request.POST:
+        bio=request.POST.get("bio")
+        pic =request.FILES['image']
+        st = ''
+        rock =request.POST.get("rock")
+        artist =  request.POST.get("artist")
+        if(rock):
+            st += rock + ' '
+        inspiration =request.POST.get("inspiration")
+        if(inspiration):
+            st += inspiration + ' '
+        dance =request.POST.get("dance")
+        if(dance):
+            st += dance + ' '
+        happy =request.POST.get("happy")
+        if(happy):
+            st += happy + ' '
+        sad =request.POST.get("sad")
+        if(sad):
+            st += sad + ' '
+        classical =request.POST.get("classical")
+        if(classical):
+            st += classical + ' '
+        romantic =request.POST.get("romantic")
+        if(romantic):
+            st += romantic + ' '
+        
+        print(st)
+        
+
+        p = Profile.objects.get(user=request.user)
+        p.bio = bio
+        p.pic = pic
+        p.tags = st
+        p.save()
+        messages.success(request,f'You have finished registration!')
+
+        return redirect('index')
+        
+        '''except:
+            e='Some error occured.Pls contact @MIP'
+            return render(request,'users/complete.html',{'page':page,'e':e})'''
+
+    print(request.user)
+    return render(request,'users/complete.html',{'page':page})
 
 
 def errorpage(request):
