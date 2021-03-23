@@ -13,6 +13,7 @@ class Song(models.Model):
     play_count = models.IntegerField(default=0)
     added_date = models.DateTimeField(auto_now_add=True)
     likedby = models.ManyToManyField(User,related_name='likedby',blank=True)
+    is_pdf = models.BooleanField(default=False)
 
     def get_is_liked(self,user):
         objs = self.likedby.all()

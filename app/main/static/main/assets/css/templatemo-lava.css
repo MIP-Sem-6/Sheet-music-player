@@ -147,6 +147,7 @@ button.main-button-slider {
   font-size: 14px;
   border-radius: 25px;
   padding: 15px 25px;
+  margin-top: 5px;
   background-color: #fba70b;
   text-transform: uppercase;
   color: #fff;
@@ -1297,6 +1298,7 @@ input[type="submit"]:hover {
   cursor: pointer;
   z-index: 1;
   border: 1px solid #71a663;
+  border-radius: 15%;
   font-family: 'Sarpanch', sans-serif;
   border-radius: 20px;
 }

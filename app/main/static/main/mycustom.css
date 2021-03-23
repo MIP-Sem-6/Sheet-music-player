@@ -233,6 +233,11 @@ button > span {
   font-size: 1.5rem;
 }
 .fa-music{
+  color: #e07934;
+  font-size: 0.9rem;
+}
+.logom{
+  font-family: 'Dancing Script', cursive;
+  margin-left: 5px;
   color: #d15f13;
 }
-
