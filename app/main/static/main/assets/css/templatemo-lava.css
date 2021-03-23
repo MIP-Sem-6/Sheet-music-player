@@ -999,7 +999,6 @@ footer .footer-content {
 
 .contact-form {
   position: relative;
-  z-index: 100;
   padding: 45px;
   border-radius: 5px;
   background-color: #fff;
@@ -1276,7 +1275,7 @@ preloader
   .carouse-control{
     &.left, &.right{
       background-image: none;
-    }
+    
   }
 }
 
