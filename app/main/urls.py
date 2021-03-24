@@ -12,4 +12,5 @@ urlpatterns = [
     path('my_songs', views.my_songs, name='my_songs'),
     path('update_song/<int:id>', views.update_song, name='update_song'),
     path('account', views.profile, name='account'),
+    path('edit_profile', views.edit_profile, name='edit_profile'),
 ]

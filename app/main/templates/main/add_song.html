@@ -14,6 +14,67 @@ body{
 svg:not(:root) {
     overflow: hidden;
 }
+/*////////////////////////toggle button//////////////////*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/*///////////////////Upload song//////////////////*/
 .main-wrapper {
     max-width: 1170px;
     
@@ -140,7 +201,7 @@ svg:not(:root) {
     animation-fill-mode: both;
 }
 
-/*cover pic part*/
+/*//////////////////////////Upload Cover Picture//////////////////*/
 #cover-upload-name{
     margin: 4px 0 0 0;
     font-size: 12px;
@@ -358,34 +419,35 @@ svg:not(:root) {
                       
                         <form id="contact" action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="tab">
-                                <button class="tablinks" onclick="openCity(event, 'Audio')">Audio</button>
-                                <button class="tablinks" onclick="openCity(event, 'Pdf')">Pdf</button>
-                                
+                            <div class="col-sm-12">  
+                                Audio  <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>  PDF  
                             </div>
-                              
-                            <div id="Audio" class="tabcontent">
-                                <div class="row">
-                                    <div class="main-wrapper">
+                            
+                            
+                            <div class="row">
+                                <div class="main-wrapper">
                                 
-                                        <div class="upload-main-wrapper">
-                                            <div class="upload-wrapper">
-                                                <input type="file" id="upload-file" name="file">
-                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
-                                                    <span class="file-upload-text">Upload Song</span> 
-                                                    <div class="file-success-text">
-                                                        <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        viewBox="0 0 100 100"  xml:space="preserve">
-                                                            <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
-                                                            <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
-                                                            27.114,51 41.402,65.288 72.485,34.205 "/>
-                                                        </svg> <span>Successfully</span>
-                                                    </div>
-                                            </div> <br>
-                                            <p id="file-upload-name"></p>
-                                        </div>
+                                    <div class="upload-main-wrapper">
+                                        <div class="upload-wrapper">
+                                            <input type="file" id="upload-file" name="file">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
+                                                <span class="file-upload-text">Upload Song</span> 
+                                                <div class="file-success-text">
+                                                    <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                    viewBox="0 0 100 100"  xml:space="preserve">
+                                                        <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
+                                                        <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                                                        27.114,51 41.402,65.288 72.485,34.205 "/>
+                                                    </svg> <span>Successfully</span>
+                                                </div>
+                                        </div> <br>
+                                        <p id="file-upload-name"></p>
                                     </div>
                                 </div>
+                            </div>
                                 <div class="col-lg-12 input-style">
                                     <fieldset>
                                         <input name="title" type="text" id="title" placeholder="Title of the song"
@@ -472,121 +534,11 @@ svg:not(:root) {
                                 </div>
                             </div>
                          
-                              
-                            <div id="Pdf" class="tabcontent">
-                                <div class="row">
-                                    <div class="main-wrapper">
-                                
-                                        <div class="upload-main-wrapper">
-                                            <div class="upload-wrapper">
-                                                <input type="file" id="upload-file" name="file">
-                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
-                                                    <span class="file-upload-text">Upload Pdf</span> 
-                                                    <div class="file-success-text">
-                                                        <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        viewBox="0 0 100 100"  xml:space="preserve">
-                                                            <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
-                                                            <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
-                                                            27.114,51 41.402,65.288 72.485,34.205 "/>
-                                                        </svg> <span>Successfully</span>
-                                                    </div>
-                                            </div> <br>
-                                            <p id="file-upload-name"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 input-style">
-                                    <fieldset>
-                                        <input name="title" type="text" id="title" placeholder="Title of the song"
-                                        required="" style="background-color: rgba(250,250,250,0.3);">
-                                    </fieldset>
-                                </div>
-                                <div class="col-lg-12 input-style">
-                                    <fieldset>
-                                        <input name="album" type="text" id="album" placeholder="Album of the song"
-                                        required="" style="background-color: rgba(250,250,250,0.3);">
-                                    </fieldset>
-                                </div>
-    
-                                <div class="col-lg-12 input-style">
-                                    <fieldset>
-                                        <input name="artist" type="text" id="artist" placeholder="Artist of the song"
-                                        required="" style="background-color: rgba(250,250,250,0.3);">
-                                    </fieldset>
-                                </div>
-    
-                                <div class="multiselect">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="dance" name="dance" >
-                                        <label class="form-check-label" for="inlineCheckbox1">Dance</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="inspiration" name="inspiration">
-                                        <label class="form-check-label" for="inlineCheckbox2">Inspiration</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="rock" name="rock">
-                                        <label class="form-check-label" for="inlineCheckbox2">Rock</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="classical" name="classical" >
-                                        <label class="form-check-label" for="inlineCheckbox2">Classical</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="romantic" name="romantic">
-                                        <label class="form-check-label" for="inlineCheckbox2">Romantic</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="happy" name="happy">
-                                        <label class="form-check-label" for="inlineCheckbox2">Happy</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sad" name="sad">
-                                        <label class="form-check-label" for="inlineCheckbox2">Sad</label>
-                                    </div>
-    
-                                </div>
-                                
-                                
-                                <div class="row">
-                                    <div class="coverpic">
-                                        <div class="main-wrapper">
-                                    
-                                            <div class="upload-main-wrapper">
-                                                <div class="upload-wrapper2">
-                                                    <input type="file" id="upload-file" name="file">
-                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="224.3881704980842 176.8527621722847 221.13266283524905 178.8472378277154" width="221.13" height="178.85"><defs><path d="M357.38 176.85C386.18 176.85 409.53 204.24 409.53 238.02C409.53 239.29 409.5 240.56 409.42 241.81C430.23 246.95 445.52 264.16 445.52 284.59C445.52 284.59 445.52 284.59 445.52 284.59C445.52 309.08 423.56 328.94 396.47 328.94C384.17 328.94 285.74 328.94 273.44 328.94C246.35 328.94 224.39 309.08 224.39 284.59C224.39 284.59 224.39 284.59 224.39 284.59C224.39 263.24 241.08 245.41 263.31 241.2C265.3 218.05 281.96 199.98 302.22 199.98C306.67 199.98 310.94 200.85 314.93 202.46C324.4 186.96 339.88 176.85 357.38 176.85Z" id="b1aO7LLtdW"></path><path d="M306.46 297.6L339.79 297.6L373.13 297.6L339.79 255.94L306.46 297.6Z" id="c4SXvvMdYD"></path><path d="M350.79 293.05L328.79 293.05L328.79 355.7L350.79 355.7L350.79 293.05Z" id="b11si2zUk"></path></defs><g><g><g><use xlink:href="#b1aO7LLtdW" opacity="1" fill="#ffffff" fill-opacity="1"></use></g><g><g><use xlink:href="#c4SXvvMdYD" opacity="1" fill="#363535" fill-opacity="1"></use></g><g><use xlink:href="#b11si2zUk" opacity="1" fill="#363535" fill-opacity="1"></use></g></g></g></g></svg>
-                                                    <span class="cover-upload-text">Upload Cover</span> 
-                                                    <div class="cover-success-text">
-                                                        <svg version="1.1" id="check" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                        viewBox="0 0 100 100"  xml:space="preserve">
-                                                            <circle style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-miterlimit:10;" cx="49.799" cy="49.746" r="44.757"/>
-                                                            <polyline style="fill:rgba(0,0,0,0);stroke:#ffffff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points="
-                                                            27.114,51 41.402,65.288 72.485,34.205 "/>
-                                                        </svg> <span>Successfully</span></div>
-                                                    </div> <br>
-                                                    <p id="cover-upload-name"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                
-                                <br>
-                                <div class="col-lg-12">
-                                    <fieldset>
-                                        <button class="main-button-slider" >
-                                            Submit
-                                        </button>
-                                    </fieldset>
-                                </div>
-                            </div> 
-                            </div>
-                              
-                
+                            
 
                         </form>
                     </div>
-                </div>
+                
             
         
                 <!-- ***** Contact Form End ***** -->

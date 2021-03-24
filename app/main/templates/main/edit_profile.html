@@ -1,0 +1,376 @@
+{% include 'main/header.html' %}
+{% load static %}
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+*{
+    box-sizing: border-box;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+
+
+[x-cloak] {
+  display: none;
+}
+
+.svg-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #333;
+}
+
+.svg-icon circle {
+  stroke: #4691f6;
+  stroke-width: 1;
+}
+
+@-webkit-keyframes bounceOutLeft {
+    20% {
+        opacity: 1;
+        -webkit-transform: translate3d(20px, 0, 0);
+        transform: translate3d(20px, 0, 0);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(-2000px, 0, 0);
+        transform: translate3d(-2000px, 0, 0);
+    }
+}
+
+@keyframes bounceOutLeft {
+    20% {
+        opacity: 1;
+        -webkit-transform: translate3d(20px, 0, 0);
+        transform: translate3d(20px, 0, 0);
+    }
+
+    to {
+        opacity: 0;
+        -webkit-transform: translate3d(-2000px, 0, 0);
+        transform: translate3d(-2000px, 0, 0);
+    }
+}
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #fba70b5c;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 93px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #f4813fd8;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #f4813f75;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.profile-img{
+    text-align: center;
+    
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+   
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.col-centered{
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+    text-align: center;
+}
+
+.row-centered {
+    text-align:center;
+}
+</style>
+
+ 
+
+
+<footer id="contact-us">
+    <div class="container">
+        <div class="footer-content">
+          
+            <div class="row">
+                <!-- ***** Contact Form Start ***** -->
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                  
+                    <div class="contact-form">
+                      
+                        <form id="contact" action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row row-centered">
+                                <div class="col-lg-3 col-centered">  </div>
+                            <div class="col-lg-6 col-centered">
+                                <div class="profile-img">
+                                    <img src="{% static 'main/assets/images/starboy.jpg' %}" alt=""/>
+                                    <div class="file btn btn-lg btn-primary">
+                                        Change Photo
+                                        <input type="file" name="file"/>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-3 col-centered">  </div>
+                            </div>
+                            <div class="row">
+                                <br>
+                                <div class="col-lg-6 input-style">
+                
+                                    <fieldset>
+                                        <input name="title" type="text" id="title" placeholder="First name"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6 input-style">
+                                    <fieldset>
+                                        <input name="album" type="text" id="album" placeholder="Last name"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 input-style">
+                                    <fieldset>
+                                        <input name="artist" type="text" id="artist" placeholder="Username"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                
+                                
+
+                                <div class="col-lg-6 input-style">
+                                    <fieldset>
+                                        <input name="artist" type="text" id="artist" placeholder="Bio"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                            </div>
+                                <div class="row">
+                                <div class="col-lg-6 input-style">
+                                    <fieldset>
+                                        <input name="artist" type="text" id="artist" placeholder="Password"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-6 input-style">
+                                    <fieldset>
+                                        <input name="artist" type="text" id="artist" placeholder="Confirm password"
+                                        required="" style="background-color: rgba(250,250,250,0.3);">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 ">
+                                <p>Select favourite genres</p>
+                            </div>
+                            <div class="col-lg-12 ">
+                                <div class="multiselect">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="dance" name="dance" >
+                                        <label class="form-check-label" for="inlineCheckbox1">Dance</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="inspiration" name="inspiration">
+                                        <label class="form-check-label" for="inlineCheckbox2">Inspiration</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="rock" name="rock">
+                                        <label class="form-check-label" for="inlineCheckbox2">Rock</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="classical" name="classical" >
+                                        <label class="form-check-label" for="inlineCheckbox2">Classical</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="romantic" name="romantic">
+                                        <label class="form-check-label" for="inlineCheckbox2">Romantic</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="happy" name="happy">
+                                        <label class="form-check-label" for="inlineCheckbox2">Happy</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="sad" name="sad">
+                                        <label class="form-check-label" for="inlineCheckbox2">Sad</label>
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                              
+                                
+                                
+                                <br>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button class="main-button-slider" >
+                                            Submit
+                                        </button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                         
+                            
+
+                        </form>
+                    </div>
+                
+            
+        
+                <!-- ***** Contact Form End ***** -->
+                <div class="right-content col-lg-6 col-md-12 col-sm-12">
+                    <h2>Update your profile</h2>
+                    <p>Fill out this form and update your profile now!</p>
+                        
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sub-footer">
+                    <p>Copyright &copy; 2020 Lava Landing Page
+
+                    | Designed by <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'main/assets/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'main/assets/js/popper.js' %}"></script>
+    <script src="{% static 'main/assets/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'main/assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'main/assets/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/imgfix.min.js' %}"></script>
+
+    <!-- Global Init -->
+    <script src="{% static 'main/assets/js/custom.js' %}"></script>
+    <script>
+      
+              function dropdown() {
+                return {
+                    options: [],
+                    selected: [],
+                    show: false,
+                    open() { this.show = true },
+                    close() { this.show = false },
+                    isOpen() { return this.show === true },
+                    select(index, event) {
+
+                        if (!this.options[index].selected) {
+
+                            this.options[index].selected = true;
+                            this.options[index].element = event.target;
+                            this.selected.push(index);
+
+                        } else {
+                            this.selected.splice(this.selected.lastIndexOf(index), 1);
+                            this.options[index].selected = false
+                        }
+                    },
+                    remove(index, option) {
+                        this.options[option].selected = false;
+                        this.selected.splice(index, 1);
+
+
+                    },
+                    loadOptions() {
+                        const options = document.getElementById('select').options;
+                        for (let i = 0; i < options.length; i++) {
+                            this.options.push({
+                                value: options[i].value,
+                                text: options[i].innerText,
+                                selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                            });
+                        }
+
+
+                    },
+                    selectedValues(){
+                        return this.selected.map((option)=>{
+                            return this.options[option].value;
+                        })
+                    }
+                }
+            }
+            function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+      </script>
+
+      </body>
+      </html>
+

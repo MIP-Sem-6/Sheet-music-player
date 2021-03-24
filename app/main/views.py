@@ -244,4 +244,10 @@ def update_song(request,id):
     }
     return render(request,'main/update_song.html',context)
 
+def edit_profile(request):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+   
+    return render(request,'main/edit_profile.html')
 
