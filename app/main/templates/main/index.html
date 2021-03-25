@@ -17,7 +17,51 @@ $(document).ready(function () {
 </script>
 {% endif %} -->
 
+ <style> 
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #fba70b;
+    margin: 5%;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 4.25%;
+    transition: 0.3s;
+    font-size: 17px;
+   
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #f4813f;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #d15f13;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    /* border: 1px solid #ccc; */
+    border-top: none;
+    margin-left:5%;
+    margin-right: 5%;
+  }
 
+  .tabcontent h3 {
+      color: #d15f13;
+  }
+  </style>
 
     <!-- ***** Welcome Area Start ***** -->
     <div class="welcome-area" id="welcome">
@@ -56,6 +100,57 @@ $(document).ready(function () {
       </div>
   </div>
 
+
+  <div class="tab">
+    <button class="tablinks" onload="openCity(event, 'All')" onclick="openCity(event, 'All')">All</button>
+    <button class="tablinks" onclick="openCity(event, 'Dance')">Dance</button>
+    <button class="tablinks" onclick="openCity(event, 'Happy')">Happy</button>
+    <button class="tablinks" onclick="openCity(event, 'Inspirational')">Inspirational</button>
+    <button class="tablinks" onclick="openCity(event, 'Rock')">Rock</button>
+    <button class="tablinks" onclick="openCity(event, 'Classical')">Classical</button>
+    <button class="tablinks" onclick="openCity(event, 'Romantic')">Romantic</button>
+    <button class="tablinks" onclick="openCity(event, 'Sad')">Sad</button>
+  </div>
+
+  <div id="All" class="tabcontent">
+    <h3>All</h3>
+    <p>All your music here!</p>
+  </div>
+  
+  <div id="Dance" class="tabcontent">
+    <h3>Dance</h3>
+    <p>All your dance music here!</p>
+  </div>
+  
+  <div id="Happy" class="tabcontent">
+    <h3>Happy</h3>
+    <p>All you happy music here!</p> 
+  </div>
+  
+  <div id="Inspirational" class="tabcontent">
+    <h3>Inspirational</h3>
+    <p>All you Inspirational music here!</p>
+  </div>
+
+  <div id="Rock" class="tabcontent">
+    <h3>Rock</h3>
+    <p>All you Rock music here!</p>
+  </div>
+
+  <div id="Classical" class="tabcontent">
+    <h3>Classical</h3>
+    <p>All you Classical music here!</p>
+  </div>
+
+  <div id="Romantic" class="tabcontent">
+    <h3>Romantic</h3>
+    <p>All you Romantic music here!</p>
+  </div>
+
+  <div id="Sad" class="tabcontent">
+    <h3>Sad</h3>
+    <p>All you Sad music here!</p>
+  </div>
   
   
 
@@ -386,6 +481,24 @@ $(document).ready(function () {
     <!-- Global Init -->
     <script src="{% static 'main/assets/js/custom.js' %}"></script>
     <script src="{% static 'main/mycustom.js' %}"></script>
+    <script>
+        document.getElementById("All").onload.style.display = "block";
+          evt.currentTarget.className += " active";
+        function openCity(evt, cityName) {
+           
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          document.getElementById(cityName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        </script>
 
 </body>
 </html>
