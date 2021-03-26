@@ -86,7 +86,7 @@
 
 	
 	<div class="limiter">
-        <div class="container-login100" style="background-image: url('{% static 'users/images/music2.jpg' %}'')">
+        <div class="container-login100" style="background-image: url('{% static 'users/images/music2.jpg' %}')">
            
 			<div class="wrap-login100 p-t-20 p-b-20">
 				<form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
@@ -113,15 +113,15 @@
                             <center><input type="file" id="files" name="image"></center>
                             
                          </span>    -->
-                         <div class="row `row-centered" >
+                         <div class="row `row-centered" style="text-align: center;" >
                              <div class="centered">
                                 
                                 <div class="col-md-4 col-centered">
                                     <div class="profile-img">
-                                        <img src="{% static 'users/images/avatar2.png' %}" alt=""/>
+                                        <img src="{% static 'users/images/avatar2.png' %}" id="image" alt=""/>
                                         <div class="file btn btn-lg btn-primary">
                                         Change Photo
-                                            <input type="file" name="file"/>
+                                        <center><input type="file" id="files" name="image"></center>
                                         </div>
                                     </div>
                                 </div>
