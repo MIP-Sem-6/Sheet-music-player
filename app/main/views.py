@@ -13,6 +13,14 @@ def index(request):
 
     trending_songs = Song.objects.all().order_by('-play_count')
 
+    dance_songs = trending_songs.filter(tags__icontains='dance')
+    happy_songs = trending_songs.filter(tags__icontains='happy')
+    romantic_songs = trending_songs.filter(tags__icontains='romantic')
+    rock_songs = trending_songs.filter(tags__icontains='rock')
+    classical_songs = trending_songs.filter(tags__icontains='classical')
+    sad_songs = trending_songs.filter(tags__icontains='sad')
+    inspiration_songs = trending_songs.filter(tags__icontains='inspiration')
+
     if request.is_ajax():
         count =request.POST.get('count')
         sid =request.POST.get('id')
@@ -47,6 +55,13 @@ def index(request):
 
     context = {
         'my_songs' : trending_songs,
+        'dance_songs' : dance_songs,
+        'happy_songs' : happy_songs,
+    'romantic_songs' : romantic_songs,
+    'rock_songs' : rock_songs,
+    'classical_songs' : classical_songs,
+    'sad_songs' : sad_songs,
+    'inspiration_songs' : inspiration_songs,
     }
     return render(request,'main/index.html',context)
 

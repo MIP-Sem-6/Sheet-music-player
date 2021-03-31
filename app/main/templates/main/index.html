@@ -114,48 +114,9 @@ $(document).ready(function () {
 
   <div id="All" class="tabcontent">
     <h3>All</h3>
-    <p>All your music here!</p>
-  </div>
-  
-  <div id="Dance" class="tabcontent">
-    <h3>Dance</h3>
-    <p>All your dance music here!</p>
-  </div>
-  
-  <div id="Happy" class="tabcontent">
-    <h3>Happy</h3>
-    <p>All you happy music here!</p> 
-  </div>
-  
-  <div id="Inspirational" class="tabcontent">
-    <h3>Inspirational</h3>
-    <p>All you Inspirational music here!</p>
-  </div>
-
-  <div id="Rock" class="tabcontent">
-    <h3>Rock</h3>
-    <p>All you Rock music here!</p>
-  </div>
-
-  <div id="Classical" class="tabcontent">
-    <h3>Classical</h3>
-    <p>All you Classical music here!</p>
-  </div>
-
-  <div id="Romantic" class="tabcontent">
-    <h3>Romantic</h3>
-    <p>All you Romantic music here!</p>
-  </div>
-
-  <div id="Sad" class="tabcontent">
-    <h3>Sad</h3>
-    <p>All you Sad music here!</p>
-  </div>
-  
-  
-
-         <!-- Topic Cards -->
-         <div id="cards_landscape_wrap-2">
+    <p>All the trending music here!</p>
+          <!-- Topic Cards -->
+          <div id="cards_landscape_wrap-2">
             <div class="container">
                 <div class="row">
                     {% for ob in my_songs %}
@@ -220,6 +181,508 @@ $(document).ready(function () {
                 </div>
             </div>
         </div>
+  </div>
+  
+  <div id="Dance" class="tabcontent">
+    <h3>Dance</h3>
+    <p>All your dance music here!</p>
+          <!-- Topic Cards -->
+          <div id="cards_landscape_wrap-2">
+            <div class="container">
+                <div class="row">
+                    {% for ob in dance_songs %}
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <div class="card-flyer">
+                                <div class="text-box">
+                                    <div class="image-box" style="position: relative;">
+                                            <img src="{{ ob.cover_image.url }}" alt="" />
+                                            {% if ob.user == request.user %}
+                    
+                                            <div class="centered-1">
+                                                <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                            </div>
+                                            <div class="centered-2">
+                                                <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                    <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                                </a>
+                                            </div>
+                                            {% endif %}
+                                       
+                                    </div>
+                                    <div class="text-container">
+                                        <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                        <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                        <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                        <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                       
+
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                
+                                        {% if ob|get_liked:request.user == True %}
+       
+                                        <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                            <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                        </button>
+
+                                        {% else %}
+
+                                        <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                            <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                        </button>
+
+                                          {% endif %}
+                                          <br>
+
+                                        <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                        <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                            <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                        </audio>
+                                       
+                                        <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    
+                </form>
+
+                    
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+  </div>
+  
+  <div id="Happy" class="tabcontent">
+    <h3>Happy</h3>
+    <p>All you happy music here!</p> 
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in happy_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <div id="Inspirational" class="tabcontent">
+    <h3>Inspirational</h3>
+    <p>All you Inspirational music here!</p>
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in inspiration_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="Rock" class="tabcontent">
+    <h3>Rock</h3>
+    <p>All you Rock music here!</p>
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in rock_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="Classical" class="tabcontent">
+    <h3>Classical</h3>
+    <p>All you Classical music here!</p>
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in classical_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="Romantic" class="tabcontent">
+    <h3>Romantic</h3>
+    <p>All you Romantic music here!</p>
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in romantic_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="Sad" class="tabcontent">
+    <h3>Sad</h3>
+    <p>All you Sad music here!</p>
+      <!-- Topic Cards -->
+      <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="row">
+                {% for ob in sad_songs %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box" style="position: relative;">
+                                        <img src="{{ ob.cover_image.url }}" alt="" />
+                                        {% if ob.user == request.user %}
+                
+                                        <div class="centered-1">
+                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
+                                        </div>
+                                        <div class="centered-2">
+                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
+                                   
+                                </div>
+                                <div class="text-container">
+                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
+                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
+                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
+                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
+                                   
+
+                                    <form method="POST">
+                                        {% csrf_token %}
+                            
+                                    {% if ob|get_liked:request.user == True %}
+   
+                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
+                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
+                                    </button>
+
+                                    {% else %}
+
+                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
+                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
+                                    </button>
+
+                                      {% endif %}
+                                      <br>
+
+                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
+                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
+                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
+                                    </audio>
+                                   
+                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </form>
+
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  
+
+   
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
