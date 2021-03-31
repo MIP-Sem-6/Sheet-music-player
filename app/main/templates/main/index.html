@@ -61,6 +61,14 @@ $(document).ready(function () {
   .tabcontent h3 {
       color: #d15f13;
   }
+
+  /* .owl-carousel .owl-item{
+  width:200px !important;
+} */
+
+  .author img{
+      border-radius: 50%;
+  }
   </style>
 
     <!-- ***** Welcome Area Start ***** -->
@@ -102,7 +110,7 @@ $(document).ready(function () {
 
 
   <div class="tab">
-    <button class="tablinks" onload="openCity(event, 'All')" onclick="openCity(event, 'All')">All</button>
+    <button class="tablinks active" onclick="openCity(event, 'All')">All</button>
     <button class="tablinks" onclick="openCity(event, 'Dance')">Dance</button>
     <button class="tablinks" onclick="openCity(event, 'Happy')">Happy</button>
     <button class="tablinks" onclick="openCity(event, 'Inspirational')">Inspirational</button>
@@ -721,193 +729,68 @@ $(document).ready(function () {
 
 
     <!-- ***** Testimonials Starts ***** -->
-    </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
-            </div>
-        </div>
-    </section>  </div>
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="center-heading">
+                        <h2>Connect with your <em>Friends</em></h2>
+                        <p>Find your friends on this platform and share your compositions with them.</p>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-12 col-sm-12 mobile-bottom-fix-big"
+                    data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item service-item">
+                            <div class="author">
+                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Author One"></i>
+                            </div>
+                            <div class="testimonial-content">
+                                
+                                <h4>Hansi Sanghani</h4>
+                                
+                                <span>Besta CTO</span>
+                            </div>
+                        </div>
+                        <div class="item service-item">
+                            <div class="author">
+                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Second Author"></i>
+                            </div>
+                            <div class="testimonial-content">
+                            
+                                <h4>Martino Tino</h4>
+                                
+                                <span>Web Analyst</span>
+                            </div>
+                        </div>
+                        <div class="item service-item">
+                            <div class="author">
+                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Author Third"></i>
+                            </div>
+                            <div class="testimonial-content">
+                                
+                                <h4>George Tasa</h4>
+                            
+                                <span>System Admin</span>
+                            </div>
+                        </div>
+                        <div class="item service-item">
+                            <div class="author">
+                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Fourth Author"></i>
+                            </div>
+                            <div class="testimonial-content">
+                                
+                                <h4>Sir James</h4>
+                                
+                                <span>New Villager</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <!-- ***** Testimonials Ends ***** -->
     <!-- ***** Testimonials Ends ***** -->
 
 
@@ -945,8 +828,13 @@ $(document).ready(function () {
     <script src="{% static 'main/assets/js/custom.js' %}"></script>
     <script src="{% static 'main/mycustom.js' %}"></script>
     <script>
-        document.getElementById("All").onload.style.display = "block";
-          evt.currentTarget.className += " active";
+        
+        
+        document.getElementById("All").style.display = "block";
+        //    onload.currentTarget.className += " active";
+        //   document.getElementsByClassName("All").style.background-color = '#d15f13';
+          
+
         function openCity(evt, cityName) {
            
           var i, tabcontent, tablinks;
