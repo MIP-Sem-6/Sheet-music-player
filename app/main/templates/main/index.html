@@ -734,57 +734,30 @@ $(document).ready(function () {
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="center-heading">
-                        <h2>Connect with your <em>Friends</em></h2>
-                        <p>Find your friends on this platform and share your compositions with them.</p>
+                        <h2>Connect with various <em>Artists</em></h2>
+                        <p>Find all the artists on this platform and share your compositions with them.</p>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-12 col-sm-12 mobile-bottom-fix-big"
                     data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                     <div class="owl-carousel owl-theme">
+                      {% for ob in f %}
+                      <a href="{% url 'view_profile' ob.user.id %} ">
                         <div class="item service-item">
                             <div class="author">
-                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Author One"></i>
+                                <i><img src="{{ ob.pic.url }}" alt="Author One" height="100" width="100"></i>
                             </div>
                             <div class="testimonial-content">
                                 
-                                <h4>Hansi Sanghani</h4>
+                                <h4> {{ob.user}}  </h4>
                                 
-                                <span>Besta CTO</span>
+                                <span>  {{ob.bio}}  </span>
                             </div>
                         </div>
-                        <div class="item service-item">
-                            <div class="author">
-                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Second Author"></i>
-                            </div>
-                            <div class="testimonial-content">
-                            
-                                <h4>Martino Tino</h4>
-                                
-                                <span>Web Analyst</span>
-                            </div>
-                        </div>
-                        <div class="item service-item">
-                            <div class="author">
-                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Author Third"></i>
-                            </div>
-                            <div class="testimonial-content">
-                                
-                                <h4>George Tasa</h4>
-                            
-                                <span>System Admin</span>
-                            </div>
-                        </div>
-                        <div class="item service-item">
-                            <div class="author">
-                                <i><img src="{% static 'main/assets/images/avatar2.png' %}" alt="Fourth Author"></i>
-                            </div>
-                            <div class="testimonial-content">
-                                
-                                <h4>Sir James</h4>
-                                
-                                <span>New Villager</span>
-                            </div>
-                        </div>
+                        </a>
+                        {% endfor %}
+                      
+                       
                     </div>
                 </div>
             </div>

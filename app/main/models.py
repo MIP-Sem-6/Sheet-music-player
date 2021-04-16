@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from users.models import Profile
 
 # Create your models here.
 class Song(models.Model):
@@ -27,4 +28,15 @@ class Song(models.Model):
     
     class Meta:
         unique_together = [['user','title','added_date']]
+
+class Friend(models.Model):
+    user1 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user1')
+    user2 = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user2')
+    profile2 = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='profile2')
+    since = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return f'{self.user1} is friends with {self.user2}  since {self.since}'
+
 

@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Song
+from .models import Song,Friend
 from django.contrib.auth import logout
 from django.contrib import messages
 from users.models import Profile
+from django.contrib.auth.models import User
+
 
 
 # Create your views here.
@@ -20,6 +22,10 @@ def index(request):
     classical_songs = trending_songs.filter(tags__icontains='classical')
     sad_songs = trending_songs.filter(tags__icontains='sad')
     inspiration_songs = trending_songs.filter(tags__icontains='inspiration')
+
+    f = Profile.objects.all()
+    f = f.exclude(user=request.user)
+
 
     if request.is_ajax():
         count =request.POST.get('count')
@@ -62,6 +68,8 @@ def index(request):
     'classical_songs' : classical_songs,
     'sad_songs' : sad_songs,
     'inspiration_songs' : inspiration_songs,
+    'f':f,
+   
     }
     return render(request,'main/index.html',context)
 
@@ -75,7 +83,18 @@ def profile(request):
     song_count = len(mysongs)
     fav_count = len(favsongs)
 
+    f = Friend.objects.all()
+    f = f.filter(user1=request.user)
+
     p = Profile.objects.get(user=request.user)
+
+    fr = Friend.objects.all()
+    fr2 = f.filter(user1=request.user)
+    following = len(fr2)
+    followers = 0
+    for o in fr:
+        if o.user2 == request.user:
+            followers += 1
 
     if request.is_ajax():
         count =request.POST.get('count')
@@ -86,12 +105,30 @@ def profile(request):
             song.play_count = 1 + song.play_count
             song.save()
 
+    f2 = Friend.objects.all()
+    f2 = f2.filter(user2=request.user)
+    li = []
+    for obj in f2:
+        li.append(obj.user1.id)
+    li = set(li)
+    y = Profile.objects.all()
+    li2 = []
+    for t in y:
+        if t.user.id in li:
+            li2.append(t)
+
+    print(f2)
+
 
     context = {
-        'my_songs' : my_songs,
+        'my_songs' : mysongs,
         'profile':p,
         'count_my':song_count,
         'count_fav':fav_count,
+        'f':f,
+        'following':following,
+        'followers':followers,
+        'f2':li2,
     }
     return render(request,'main/account.html',context)
 
@@ -265,4 +302,64 @@ def edit_profile(request):
 
    
     return render(request,'main/edit_profile.html')
+
+def view_profile(request,id):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+    
+    obj = User.objects.get(id=id)
+    pro = Profile.objects.get(user=obj)
+
+    is_friend = False
+    since = ''
+    f = Friend.objects.all()
+    f = f.filter(user1=request.user)
+    for o in f:
+        if o.user2 == obj:
+            is_friend = True
+            since = o.since
+            break
+
+    songs = Song.objects.all()
+    mysongs = songs.filter(user=obj)
+    favsongs = songs.filter(likedby=obj)
+
+    song_count = len(mysongs)
+    fav_count = len(favsongs)
+
+    fr = Friend.objects.all()
+    fr2 = fr.filter(user1=obj)
+    following = len(fr2)
+    followers = 0
+    for o in fr:
+        if o.user2 == obj:
+            followers += 1
+
+    if 'unfollow' in request.POST:
+        f = Friend.objects.all()
+        f1 = f.filter(user1 = request.user,user2=obj)
+        f1.delete()
+        messages.success(request,f'You have unfollowed {obj}!')
+        return redirect('view_profile',id)
+
+    if 'follow' in request.POST:
+        Friend.objects.create(user1=request.user,user2=obj,profile2=pro)
+        messages.success(request,f'You followed {obj}!')
+        return redirect('view_profile',id)
+
+
+    context = {
+        'obj' : obj,
+        'profile' : pro,
+        'is_friend':is_friend,
+        'since':since,
+        'mysongs':mysongs,
+        'count_my':song_count,
+        'count_fav':fav_count,
+        'following':following,
+        'followers':followers
+    }   
+    
+    return render(request,'main/view_profile.html',context)
+
 
