@@ -4,6 +4,7 @@ import ctc_utils
 import cv2
 import numpy as np
 import logging
+from midiutil.MidiFile import MIDIFile
 
 logging.getLogger('tensorflow').disabled = True
 
@@ -161,3 +162,102 @@ def imageToNotes(image):
 	strips = splitToStrips(image)
 	readable = getReadableNotes(strips)
 	return readable
+
+def notesToMIDI(notes_arr):
+	# create your MIDI object
+	num_tracks = len(notes_arr)
+	mf = MIDIFile(1)     # only 1 track
+
+	time = 0    # start at the beginning
+
+
+	# add some notes
+	channel = 0
+	volume = 100
+
+
+	duration_switcher = {
+		"sixty_fourth" : 0.0625,
+		"thirty_second" : 0.125,
+		"thirty_second." : 0.125,
+		"sixteenth" : 0.25,
+		"sixteenth." : 0.25,
+		"eighth" : 0.5,
+		"eighth." : 0.5,
+		"quarter" : 1,
+		"quarter." : 1,
+		"half" : 2,
+		"half." : 2,
+		"whole" : 4,
+		"whole." : 4,
+		"double_whole" : 8,
+		"double_whole." : 8,
+		"quadruple_whole" : 16,
+		"quadruple_whole." : 16,
+	}
+	
+	pitch_switcher = {
+		"C" : 0,
+		"C#" : 1,
+		"Db" : 1,
+		"D" : 2,
+		"D#" : 3,
+		"Eb" : 3,
+		"E" : 4,
+		"F" : 5,
+		"F#" : 6,		
+		"Gb" : 6,
+		"G" : 7,
+		"G#" : 8,
+		"Ab" : 8,
+		"A" : 9,
+		"A#" : 10,
+		"Bb" : 10,
+		"B" : 11,
+	}
+
+	track = 0
+	time = 0
+	mf.addTrackName(track, time, "Sample Track")
+	mf.addTempo(track, time, 120)
+	for notes in notes_arr:
+		for note in notes:
+			splits = note.split("_", 1)
+			splits2 = splits[0].split("-", 1)
+			if splits2[0] == "rest":
+				duration = splits2[1]
+				duration = duration_switcher.get(duration, 0)
+				time += duration
+				print("rest -- ", time)
+			elif splits2[0] == "multirest":
+				duration = int(splits2[1])
+				time += duration
+			elif splits2[0] == "note" or splits2[0] == "gracenote":
+				duration = splits[1]
+				duration = duration_switcher.get(duration, 0)
+
+				pitch = splits2[1]
+				num = int(pitch[-1])
+				pitch = (12 * (num	)) + pitch_switcher.get(pitch[0:-1], 0)
+				if pitch and duration:
+					print("Note  -  ", time)
+					mf.addNote(track, channel, pitch, time, duration, volume)
+					time += duration
+
+	with open("output.mid", 'wb') as outf:
+		mf.writeFile(outf)
+
+
+if __name__ == "__main__":
+	image = cv2.imread("/home/boomerang/boomerang/BTech_CS/MIP-Sem6/ComputerVision/tf-end-to-end-master/Data/Example/o2j.jpg")
+
+	cv2.imshow("input", image)
+	cv2.waitKey(0)
+	cv2.destroyAllWindows()
+
+	readable = imageToNotes(image)
+
+	for x in readable:
+		print(x)
+
+	notesToMIDI(readable)
