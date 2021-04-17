@@ -5,6 +5,9 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from users.models import Profile
 from django.contrib.auth.models import User
+import pdfkit
+from django.template import loader
+
 
 
 
@@ -87,6 +90,7 @@ def profile(request):
     f = f.filter(user1=request.user)
 
     p = Profile.objects.get(user=request.user)
+    my_tags = str(p.tags).split(' ')
 
     fr = Friend.objects.all()
     fr2 = f.filter(user1=request.user)
@@ -117,7 +121,6 @@ def profile(request):
         if t.user.id in li:
             li2.append(t)
 
-    print(f2)
 
 
     context = {
@@ -129,6 +132,7 @@ def profile(request):
         'following':following,
         'followers':followers,
         'f2':li2,
+        'my_tags':my_tags,
     }
     return render(request,'main/account.html',context)
 
@@ -309,6 +313,9 @@ def view_profile(request,id):
     
     obj = User.objects.get(id=id)
     pro = Profile.objects.get(user=obj)
+    my_tags = str(pro.tags).split(' ')
+    my_tags = [i for i in my_tags if i]
+    print(my_tags)
 
     is_friend = False
     since = ''
@@ -357,9 +364,80 @@ def view_profile(request,id):
         'count_my':song_count,
         'count_fav':fav_count,
         'following':following,
-        'followers':followers
+        'followers':followers,
+        'my_tags':my_tags,
     }   
     
     return render(request,'main/view_profile.html',context)
+
+def tag(request,name):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    my_songs = Song.objects.all()
+    my_songs = my_songs.filter(tags__icontains=name)
+
+    if 'subscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.add(request.user)
+        messages.success(request,f'Added to favourites!')
+        print(f'{request.user} liked {fs.title}')
+        return redirect('index')
+    
+    if 'unsubscribe' in request.POST:
+        fav_song = request.POST.get('songid')
+        fs = Song.objects.get(id=fav_song)
+        fs.likedby.remove(request.user)
+        messages.success(request,f'Removed from favourites!')
+        print(f'{request.user} unliked {fs.title}')
+        return redirect('index')
+
+
+    context = {
+        'my_songs' : my_songs,
+        'name':name,
+    }
+    return render(request,'main/tag.html',context)
+
+def audio(request,id):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    
+
+    if 'image' in request.POST:
+        img =request.FILES['file']
+        context = {
+        'id':2,
+        }
+        return render(request,'main/audio.html',context)
+
+    if 'pdf' in request.POST:
+        notes = request.POST.get("notes")
+        return redirect('download',notes)
+        
+    
+    context = {
+        'id':id,
+    }
+
+    return render(request,'main/audio.html',context)
+
+def download(request,notes):
+    if not request.user.is_authenticated:
+        return redirect('errorpage')
+
+    template = loader.get_template('main/notes.html')
+    html = template.render({'notes':notes,'user':request.user})
+    options = {
+        'page-size':'Letter',
+        'encoding':"UTF-8",
+    }
+    pdf = pdfkit.from_string(html,False,options)
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment'
+    return response
+
 
 

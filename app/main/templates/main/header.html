@@ -68,14 +68,27 @@ https://templatemo.com/tm-540-lava-landing-page
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="{% url 'index'%}">Home</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Genres</a>
+                                <ul>
+                                    <li><a href="{% url 'tag' 'inspiration' %}">Inspirational</a></li>
+                                    <li><a href="{% url 'tag' 'happy' %}">Happy</a></li>
+                                    <li><a href="{% url 'tag' 'sad' %}">Sad</a></li>
+                                    <li><a href="{% url 'tag' 'rock' %}">Rock</a></li>
+                                    <li><a href="{% url 'tag' 'classical' %}">Classical</a></li>
+                                    <li><a href="{% url 'tag' 'dance' %}">Dance</a></li>
+                                    <li><a href="{% url 'tag' 'romantic' %}">Romantic</a></li>
+                                </ul>
+                            </li>
                             <li ><a href="{% url 'add_song' %}" >Add Song</a>
+                                <li ><a href="{% url 'audio' 1 %}" >Image to Audio</a>
                                 <li ><a href="{% url 'fav' %}" >Favourites</a>
                             </li>
-                            <li class="scroll-to-section"><a href="{% url 'my_songs' %}">My Songs</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Account</a>
                                 <ul>
                                     <li><a href="{% url 'account' %}">Profile</a></li>
+                                    <li><a href="{% url 'my_songs' %}">My songs</a></li>
                                     <li><a href="{% url 'logout' %}">Log out</a></li>
                                 </ul>
                             </li>

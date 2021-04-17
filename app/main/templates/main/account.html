@@ -130,15 +130,10 @@
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>FAVOURITE GENRES</p>
-                            <a href="">Happy</a><br/>
-                            <a href="">Romantic</a><br/>
-                            <a href="">Pop</a>
-                            <p>TOP MUSIC</p>
-                            <a href="">Starboy</a><br/>
-                            <a href="">Sparkle</a><br/>
-                            <a href="">Shock</a><br/>
-                            <a href="">dam dam</a><br/>
-                            <a href="">Intentions</a><br/>
+                            {% for x in my_tags %}
+                            <a href="{% url 'tag' x %}" style="text-transform: uppercase;">{{ x }}</a><br/>
+                            {% endfor %}
+                            
                         </div>
                     </div>
                     <div class="col-md-8">
