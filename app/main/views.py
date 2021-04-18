@@ -7,6 +7,9 @@ from users.models import Profile
 from django.contrib.auth.models import User
 import pdfkit
 from django.template import loader
+from PIL import Image
+import io,cv2,numpy
+from .tf_model import predictStrip
 
 
 
@@ -407,7 +410,10 @@ def audio(request,id):
     
 
     if 'image' in request.POST:
-        img =request.FILES['file']
+        img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
+        readable = predictStrip.imageToNotes(img)
+        print(readable)
+
         context = {
         'id':2,
         }

@@ -1,6 +1,6 @@
 import argparse
 import tensorflow as tf
-import ctc_utils
+from . import ctc_utils
 import cv2
 import numpy as np
 import logging
@@ -11,9 +11,11 @@ logging.getLogger('tensorflow').disabled = True
 tf.reset_default_graph()
 sess=tf.InteractiveSession()
 
-image_loc = "./Data/Example/1.jpg" 
-voc_file = "./Data/vocabulary_semantic.txt"
-model = "./SemanticModel/semantic_model.meta"
+image_loc = "Data/Example/1.jpg" 
+voc_file = "/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt" 
+model = "/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta"
+
+
 
 
 def splitToStrips(image):
@@ -248,16 +250,4 @@ def notesToMIDI(notes_arr):
 		mf.writeFile(outf)
 
 
-if __name__ == "__main__":
-	image = cv2.imread("/home/boomerang/boomerang/BTech_CS/MIP-Sem6/ComputerVision/tf-end-to-end-master/Data/Example/o2j.jpg")
 
-	cv2.imshow("input", image)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
-
-	readable = imageToNotes(image)
-
-	for x in readable:
-		print(x)
-
-	notesToMIDI(readable)
