@@ -5,17 +5,16 @@ import cv2
 import numpy as np
 import logging
 from midiutil.MidiFile import MIDIFile
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 logging.getLogger('tensorflow').disabled = True
 
-tf.reset_default_graph()
-sess=tf.InteractiveSession()
-
 image_loc = "Data/Example/1.jpg" 
-voc_file = "/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt" 
-model = "/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta"
+voc_file = '/static/SemanticModel/vocabulary_semantic.txt'
+model = '/home/boomerang/boomerang/BTech_CS/MIP-Sem6/Sheet-music-player/app/main/static/SemanticModel/semantic_model.meta'
 
 
+url = staticfiles_storage.url('data/foobar.csv')
 
 
 def splitToStrips(image):
@@ -41,7 +40,6 @@ def splitToStrips(image):
 	horizontal = cv2.erode(horizontal, horizontalStructure, (-1, -1))
 	horizontal = cv2.dilate(horizontal, horizontalStructure, (-1, -1))
 
-	cv2.imshow("horizontal", horizontal)
 	h,w = og_img.shape
 	print(h, w)
 
@@ -115,6 +113,9 @@ def getReadableNotes(strips):
 		int2word[word_idx] = word
 	dict_file.close()
 
+
+	tf.reset_default_graph()
+	sess=tf.InteractiveSession()
 
 	# Restore weights
 	saver = tf.train.import_meta_graph(model)
