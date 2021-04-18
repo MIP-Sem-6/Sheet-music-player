@@ -465,7 +465,11 @@ input:checked + .slider:before {
                                    
                                     <div class="form-group">
                                         <label for="exampleFormControlTextarea1"> Edit Notes </label>
-                                        <textarea class="form-control" id="notes" name="notes" rows="10" cols="50"></textarea>
+                                        <textarea class="form-control" id="notes" name="notes" rows="10" cols="50">
+                                            {% for x in readable %}
+                                            {{ x }} 
+                                            {% endfor %}
+                                        </textarea>
                                       </div>
 
                                     

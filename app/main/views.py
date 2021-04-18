@@ -94,6 +94,7 @@ def profile(request):
 
     p = Profile.objects.get(user=request.user)
     my_tags = str(p.tags).split(' ')
+    my_tags = [i for i in my_tags if i]
 
     fr = Friend.objects.all()
     fr2 = f.filter(user1=request.user)
@@ -318,7 +319,6 @@ def view_profile(request,id):
     pro = Profile.objects.get(user=obj)
     my_tags = str(pro.tags).split(' ')
     my_tags = [i for i in my_tags if i]
-    print(my_tags)
 
     is_friend = False
     since = ''
@@ -412,16 +412,29 @@ def audio(request,id):
     if 'image' in request.POST:
         img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
         readable = predictStrip.imageToNotes(img)
-        print(readable)
 
         context = {
         'id':2,
+        'readable' : readable,
         }
         return render(request,'main/audio.html',context)
 
     if 'pdf' in request.POST:
         notes = request.POST.get("notes")
-        return redirect('download',notes)
+        template = loader.get_template('main/notes.html')
+        html = template.render({'notes':notes,'user':request.user})
+        options = {
+        'page-size':'Letter',
+        'encoding':"UTF-8",
+        }
+        pdf = pdfkit.from_string(html,False,options)
+        response = HttpResponse(pdf,content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment'
+        return response
+
+    if 'audio' in request.POST:
+        notes = request.POST.get("notes")
+        #call function to generate audio file
         
     
     context = {
