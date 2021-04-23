@@ -340,7 +340,7 @@ input:checked + .slider:before {
 }
 
 .form-control{
-    width: 135%;
+    width: 100%;
 }
 
 @-webkit-keyframes bounceOutLeft {
@@ -468,7 +468,7 @@ input:checked + .slider:before {
                                 
                                    
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1" style="padding-left: 30%;"> Edit Notes </label>
+                                        <label for="exampleFormControlTextarea1" style="padding-left: 0%;"> Edit Notes </label>
                                         <textarea class="form-control" id="notes" name="notes" rows="10" cols="50">
                                             {% for x in readable %}
                                             {{ x }} 
@@ -481,11 +481,6 @@ input:checked + .slider:before {
                                        
                                 <br>
                                 <div class="col-lg-12">
-                                    <fieldset>
-                                        <button class="main-button-slider" name="pdf">
-                                            Download PDF
-                                        </button>
-                                    </fieldset>
 
                                     <fieldset>
                                         <button class="main-button-slider" name="audio">
