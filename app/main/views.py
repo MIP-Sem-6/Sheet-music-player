@@ -9,7 +9,7 @@ import pdfkit
 from django.template import loader
 from PIL import Image
 import io,cv2,numpy
-from .tf_model import predictStrip
+# from .tf_model import predictStrip
 
 
 
@@ -411,8 +411,8 @@ def audio(request,id):
 
     if 'image' in request.POST:
         img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
-        readable = predictStrip.imageToNotes(img)
-
+        # readable = predictStrip.imageToNotes(img)
+        readable = [['timeSignature-C/', 'note-E4_quarter', 'note-E4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'note-D4_quarter', 'barline'],['timeSignature-C/', 'note-C4_quarter', 'note-D4_quarter', 'note-E4_quarter', 'barline', 'note-E4_quarter.', 'note-D4_eighth', 'note-C4_quadruple_whole', 'barline'],['timeSignature-C/', 'clef-G2', 'note-E4_quarter', 'note-E4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-E4_quarter', 'barline'],['timeSignature-C/', 'note-G3_eighth', 'note-C#4_half', 'note-D4_quarter', 'note-E4_quarter', 'barline', 'note-D4_quarter.', 'note-C4_eighth', 'note-C#4_quarter', 'rest-quarter', 'barline']]
         context = {
         'id':2,
         'readable' : readable,

@@ -79,7 +79,7 @@ input:checked + .slider:before {
     max-width: 1170px;
     
     text-align: center;
-    padding-left: 27%;
+    
 }
 .upload-main-wrapper{
     width: 220px;
@@ -339,6 +339,10 @@ input:checked + .slider:before {
   stroke-width: 1;
 }
 
+.form-control{
+    width: 135%;
+}
+
 @-webkit-keyframes bounceOutLeft {
     20% {
         opacity: 1;
@@ -423,7 +427,7 @@ input:checked + .slider:before {
                             
                             {% if id == 1 %}
                             <div class="row">
-                                <div class="main-wrapper">
+                                <div class="main-wrapper" style="padding-left: 27%;">
                                 
                                    
                                     <div class="upload-main-wrapper">
@@ -464,14 +468,13 @@ input:checked + .slider:before {
                                 
                                    
                                     <div class="form-group">
-                                        <label for="exampleFormControlTextarea1"> Edit Notes </label>
+                                        <label for="exampleFormControlTextarea1" style="padding-left: 30%;"> Edit Notes </label>
                                         <textarea class="form-control" id="notes" name="notes" rows="10" cols="50">
                                             {% for x in readable %}
                                             {{ x }} 
                                             {% endfor %}
                                         </textarea>
                                       </div>
-
                                     
                                 </div>
                             </div>

@@ -939,9 +939,7 @@ testimonials
   position: absolute;
 }
 
-.owl-item{
-  width:300px !important;
-}
+
 
 .owl-carousel .owl-nav button.owl-prev span {
   z-index: 9;

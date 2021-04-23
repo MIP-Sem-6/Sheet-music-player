@@ -117,6 +117,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Statistics</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="profile" aria-selected="false">Following</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="profile" aria-selected="false">Followers</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -165,171 +171,101 @@
                                         </div>
                                      
 
-                                        <div class="col-lg-8 offset-lg-2">
-                                            <div class="center-heading">
-                                                <h2>Your <em>Songs</em></h2>
-                                            </div>
-                                        </div>
-                                         <!-- Topic Cards -->
-      <div id="cards_landscape_wrap-2">
-        <div class="container">
-            <div class="row">
-                {% for ob in my_songs %}
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <div class="card-flyer">
-                            <div class="text-box">
-                                <div class="image-box" style="position: relative;">
-                                        <img src="{{ ob.cover_image.url }}" alt="" />
-                                        {% if ob.user == request.user %}
-                
-                                        <div class="centered-1">
-                                            <a href="{% url 'update_song' ob.id %}"><i class="fa fa-edit song-update"></i></a>
-                                        </div>
-                                        <div class="centered-2">
-                                            <a href="#" role="button"  data-toggle="modal" data-target="#exampleModal">
-                                                <i class="fa fa-ban song-delete" onclick="setDeleteId({{ob.id}})"></i>
-                                            </a>
-                                        </div>
-                                        {% endif %}
-                                   
-                                </div>
-                                <div class="text-container">
-                                    <h5 style="font-weight: 900;">{{ ob.title }}</h5>
-                                    <p class="album" style="color: #d15f13;">{{ ob.album }}</p>
-                                    <p class="sub"> <i class="fa fa-music"></i> {{ ob.artist }}</p>
-                                    <p class="sub"> <i class="fa fa-user"></i> {{ ob.user }}</p>
-                                   
-
-                                    <form method="POST">
-                                        {% csrf_token %}
-                            
-                                    {% if ob|get_liked:request.user == True %}
-   
-                                    <button id="swapHeart" class="btn btn-default" name="unsubscribe">
-                                        <span class="fa fa-heart"> <span class="tooltip" style="margin-top: 20px;">Remove from favourites</span></span>
-                                    </button>
-
-                                    {% else %}
-
-                                    <button id="swapHeart" class="btn btn-default" name="subscribe">
-                                        <span class="fa fa-heart-o"> <span class="tooltip" style="margin-top: 20px;">Add to favourites</span></span>
-                                    </button>
-
-                                      {% endif %}
-                                      <br>
-
-                                    <a href="#"><span class="badge badge-warning"> {{ ob.tags }} </span></a> <br> 
-                                    <audio controls id="soundPlayer" onplay="sendCount({{ob.id}});">
-                                        <source src="{{ ob.file_name.url }}" type="audio/mpeg">
-                                    </audio>
-                                   
-                                    <input class="inv" name="songid" type="number" value="{{ob.id}}"> 
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                
-            </form>
-
-                
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
-                                          <!-- ***** Testimonials Starts ***** -->
-    
-        Your following 
-        {% for ob in f %}
-                    <a href="{% url 'view_profile' ob.user2.id %} ">
-                      <div class="item service-item">
-                          <div class="author">
-                              <i><img src="{{ ob.profile2.pic.url }}" alt="Author One" height="100" width="100"></i>
-                          </div>
-                          <div class="testimonial-content">
-                              
-                              <h4> {{ob.user2}}  </h4>
-                              
-                              <span>  {{ob.profile2.bio}}  </span>
-                          </div>
-                      </div>
-                      </a>
-                      {% endfor %}
-
-                      Your followers 
-                      {% for ob in f2 %}
-                                  <a href="{% url 'view_profile' ob.user.id %} ">
-                                    <div class="item service-item">
-                                        <div class="author">
-                                            <i><img src="{{ ob.pic.url }}" alt="Author One" height="100" width="100"></i>
-                                        </div>
-                                        <div class="testimonial-content">
-                                            
-                                            <h4> {{ob.user}}  </h4>
-                                            
-                                            <span>  {{ob.bio}}  </span>
-                                        </div>
-                                    </div>
-                                    </a>
-                                    {% endfor %}
-
+                                        
+                                         
                                         
                             </div>
+                            
+                            
+                            
+                            
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>User</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Pro</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Songs uploaded</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{count_my}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite songs</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{count_fav}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Hours spent</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>20hrs 24mins</p>
+                                    </div>
+                                </div>
+                             
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Followers</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{followers}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Following</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{following}}</p>
+                                    </div>
+                                </div>
+                                    
+                                
+                            </div>
+                            <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                                {% for ob in f %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>User</label>
+                                                <label>{{ob.user2}} </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Pro</p>
+                                                <i><img src="{{ ob.profile2.pic.url }}" alt="Author One" height="100" width="100" style="border-radius: 50%;"></i>
                                             </div>
                                         </div>
+                    
+                                       
+            
+                                 {% endfor %}       
+                            </div>
+                            <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+                                {% for ob in f2 %}
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Songs uploaded</label>
+                                                <label>{{ob.user}} </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{count_my}}</p>
+                                                <i><img src="{{ ob.pic.url }}" alt="Author One" height="100" width="100" style='border-radius: 50%'></i>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite songs</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{count_fav}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hours spent</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>20hrs 24mins</p>
-                                            </div>
-                                        </div>
-                                     
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Followers</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{followers}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Following</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{following}}</p>
-                                            </div>
+                    
                                         </div>
             
-                                        
-                                    </div>
-                                </div>
+                                {% endfor %}       
                             </div>
+                        </div>
+                        </div>
+
+
                         </div>
                     </div>
                 </div>
