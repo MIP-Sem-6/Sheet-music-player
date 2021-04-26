@@ -412,7 +412,7 @@ def audio(request,id):
     if 'image' in request.POST:
         img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
         readable = predictStrip.imageToNotes(img)
-        # readable = [['timeSignature-C/', 'note-E4_quarter', 'note-E4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'note-D4_quarter', 'barline'],['timeSignature-C/', 'note-C4_quarter', 'note-D4_quarter', 'note-E4_quarter', 'barline', 'note-E4_quarter.', 'note-D4_eighth', 'note-C4_quadruple_whole', 'barline'],['timeSignature-C/', 'clef-G2', 'note-E4_quarter', 'note-E4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-E4_quarter', 'barline'],['timeSignature-C/', 'note-G3_eighth', 'note-C#4_half', 'note-D4_quarter', 'note-E4_quarter', 'barline', 'note-D4_quarter.', 'note-C4_eighth', 'note-C#4_quarter', 'rest-quarter', 'barline']]
+        print(type(readable))
         context = {
         'id':2,
         'readable' : readable,
@@ -433,7 +433,10 @@ def audio(request,id):
         return response
 
     if 'audio' in request.POST:
-        notes = request.POST.get("notes")
+        # notes = request.POST.get("notes")
+        notes = [['clef-G2', 'timeSignature-6/4', 'note-E4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_quarter', 'note-C4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-D4_quarter.', 'note-D4_quarter', 'note-D4_half.', 'barline'], ['clef-G2', 'timeSignature-C/', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'barline', 'note-F4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_half', 'note-C4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-B3_quarter', 'barline'], ['clef-G2', 'timeSignature-3/2', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-B3_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-C4_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'note-C4_quarter', 'barline', 'note-C4_half', 'note-D4_quarter', 'note-C5_half', 'note-D4_quarter', 'barline'], ['clef-G2', 'timeSignature-6/8', 'note-D4_quarter', 'note-C4_quarter', 'note-D4_quarter', 'note-F4_eighth', 'barline', 'note-D4_quarter', 'note-D4_eighth', 'note-D4_quarter', 'note-B3_eighth', 'barline', 'note-B3_sixteenth', 'note-A3_sixteenth', 'note-B3_eighth', 'note-C4_eighth', 'barline', 'note-B3_sixteenth', 'note-B3_sixteenth', 'barline']]
+        predictStrip.notesToMusic(notes)
+        print("Music banaya badaa mazaa aaya")
         #call function to generate audio file
         
     
