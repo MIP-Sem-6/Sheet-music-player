@@ -10,6 +10,8 @@ from django.template import loader
 from PIL import Image
 import io,cv2,numpy
 from .tf_model import predictStrip
+import ast
+
 
 
 
@@ -403,11 +405,30 @@ def tag(request,name):
     }
     return render(request,'main/tag.html',context)
 
+def get_notes(x):
+    res = x.strip()
+    s = ''
+    li = []
+    for y in res:
+        if y==" ":
+            continue
+        elif y ==']':
+            s += y
+            li.append(s)
+            s = ''
+        else:
+            s += y
+    fin = []
+    for x in li:
+        fin.append(ast.literal_eval(x))
+    return fin
+
 def audio(request,id):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
     
+    tab = 0
 
     if 'image' in request.POST:
         img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
@@ -433,15 +454,22 @@ def audio(request,id):
         return response
 
     if 'audio' in request.POST:
-        # notes = request.POST.get("notes")
-        notes = [['clef-G2', 'timeSignature-6/4', 'note-E4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_quarter', 'note-C4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-D4_quarter.', 'note-D4_quarter', 'note-D4_half.', 'barline'], ['clef-G2', 'timeSignature-C/', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'barline', 'note-F4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_half', 'note-C4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-B3_quarter', 'barline'], ['clef-G2', 'timeSignature-3/2', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-B3_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-C4_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'note-C4_quarter', 'barline', 'note-C4_half', 'note-D4_quarter', 'note-C5_half', 'note-D4_quarter', 'barline'], ['clef-G2', 'timeSignature-6/8', 'note-D4_quarter', 'note-C4_quarter', 'note-D4_quarter', 'note-F4_eighth', 'barline', 'note-D4_quarter', 'note-D4_eighth', 'note-D4_quarter', 'note-B3_eighth', 'barline', 'note-B3_sixteenth', 'note-A3_sixteenth', 'note-B3_eighth', 'note-C4_eighth', 'barline', 'note-B3_sixteenth', 'note-B3_sixteenth', 'barline']]
-        predictStrip.notesToMusic(notes)
+        val = request.POST.get("notes")
+        val = get_notes(val)
+        print(val)
+        #notes = [['clef-G2', 'timeSignature-6/4', 'note-E4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-G4_quarter', 'barline', 'note-G4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_quarter', 'note-C4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-D4_quarter.', 'note-D4_quarter', 'note-D4_half.', 'barline'], ['clef-G2', 'timeSignature-C/', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'barline', 'note-F4_quarter', 'note-F4_half', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-C4_half', 'note-C4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'barline', 'note-B3_quarter', 'barline'], ['clef-G2', 'timeSignature-3/2', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-B3_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-D4_quarter', 'note-C4_quarter', 'barline', 'note-D4_quarter', 'note-D4_quarter', 'note-F4_quarter', 'note-E4_quarter', 'note-C4_quarter', 'barline', 'note-C4_half', 'note-D4_quarter', 'note-C5_half', 'note-D4_quarter', 'barline'], ['clef-G2', 'timeSignature-6/8', 'note-D4_quarter', 'note-C4_quarter', 'note-D4_quarter', 'note-F4_eighth', 'barline', 'note-D4_quarter', 'note-D4_eighth', 'note-D4_quarter', 'note-B3_eighth', 'barline', 'note-B3_sixteenth', 'note-A3_sixteenth', 'note-B3_eighth', 'note-C4_eighth', 'barline', 'note-B3_sixteenth', 'note-B3_sixteenth', 'barline']]
+        predictStrip.notesToMusic(val)
         print("Music banaya badaa mazaa aaya")
+        messages.success(request,f'Audio file generated successfully!')
+        tab = 1
+        id = 2
         #call function to generate audio file
         
     
     context = {
         'id':id,
+        'tab':tab,
+        'path': 'main/music/music-file.mp3'
     }
 
     return render(request,'main/audio.html',context)
