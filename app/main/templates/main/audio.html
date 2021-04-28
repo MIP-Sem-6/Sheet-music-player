@@ -342,6 +342,32 @@ input:checked + .slider:before {
 .form-control{
     width: 100%;
 }
+.btn{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-decoration: none;
+
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
 
 @-webkit-keyframes bounceOutLeft {
     20% {
@@ -410,6 +436,19 @@ input:checked + .slider:before {
 
 {% if tab == 1 %}
 <a href="{% static path %}" download="">Clcik here to download the file</a>
+<form id="contact" action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+<br> 
+<div class="form-group">
+  <label for="exampleInputEmail1">Send via mail</label>
+  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email_audio">
+  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+</div>
+<br>
+<button class="main-button-slider" type="submit" name="send_audio">
+  Send Email
+</button>
+</form>
 {% else %}
 
 
@@ -486,6 +525,13 @@ input:checked + .slider:before {
                                 <br>
                                 <div class="col-lg-12">
 
+                                    <div class="btn" onclick="copy()">
+                                        Copy
+                                    </div>
+                        
+
+                            
+
                                     <fieldset>
                                         <fieldset>
                                             <button class="main-button-slider" name="pdf">
@@ -496,6 +542,17 @@ input:checked + .slider:before {
                                             Download Audio
                                         </button>
                                     </fieldset>
+
+                                    <br> 
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Send via mail</label>
+                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    </div>
+                                    <br>
+                                    <button class="main-button-slider" type="submit" name="send_email">
+                                      Send Email
+                                  </button>
                                 </div>
                             </div>
                             {% endif %}
@@ -546,6 +603,14 @@ input:checked + .slider:before {
     <!-- Global Init -->
     <script src="{% static 'main/assets/js/custom.js' %}"></script>
     <script>
+
+function copy() {
+  let textarea = document.getElementById("notes");
+  textarea.select();
+  document.execCommand("copy");
+  
+}
+
       console.log("Step 1");
        $(document).ready(function(){
                     

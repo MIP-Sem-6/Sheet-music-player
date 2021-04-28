@@ -10,7 +10,9 @@ from django.template import loader
 from PIL import Image
 import io,cv2,numpy
 from .tf_model import predictStrip
-import ast
+import ast,re
+from django.core.mail import send_mail,EmailMessage
+
 
 
 
@@ -429,16 +431,13 @@ def audio(request,id):
 
     
     tab = 0
+    mynotes = ''
 
     if 'image' in request.POST:
         img = cv2.imdecode(numpy.fromstring(request.FILES['file'].read(), numpy.uint8), cv2.IMREAD_UNCHANGED)
         readable = predictStrip.imageToNotes(img)
-        print(type(readable))
-        context = {
-        'id':2,
-        'readable' : readable,
-        }
-        return render(request,'main/audio.html',context)
+        mynotes = readable
+        id = 2
 
     if 'pdf' in request.POST:
         notes = request.POST.get("notes")
@@ -464,12 +463,40 @@ def audio(request,id):
         tab = 1
         id = 2
         #call function to generate audio file
+
+    if 'send_email' in request.POST:
+        email = request.POST.get("email")
+        email = re.sub('\s+',' ',email)
+        val = request.POST.get("notes")
+        subject = f'Notes by {request.user.username}'
+        message = re.sub('\s+',' ',val)
+        val = get_notes(val)
+        email_from = 'himali.saini@somaiya.edu'
+        recipient_list = [email, ]
+        send_mail( subject, message, email_from, recipient_list )
+        messages.success(request, 'Email has been sent')
+        id = 2
+        mynotes = val
+    
+    if 'send_audio' in request.POST:
+        email = request.POST.get("email_audio")
+        email = re.sub('\s+',' ',email)
+        subject = f'Audio file by {request.user.username}'
+        message = f'Service provided by SMP'
+        mail = EmailMessage(subject, message, 'smp.mip123@gmail.com', [email])
+        mail.attach_file('/Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/music-file.mp3')
+        mail.send()
+        messages.success(request, 'Email has been sent')
+        id = 2
+        tab = 1
+        print('hiiii')
         
     
     context = {
         'id':id,
         'tab':tab,
-        'path': 'main/music/music-file.mp3'
+        'path': 'main/music/music-file.mp3',
+        'readable':mynotes,
     }
 
     return render(request,'main/audio.html',context)
