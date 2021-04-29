@@ -312,8 +312,13 @@ def edit_profile(request):
     if not request.user.is_authenticated:
         return redirect('errorpage')
 
-   
-    return render(request,'main/edit_profile.html')
+    u = request.user
+    p = Profile.objects.get(user=u)
+    context = {
+        'u':u,
+        'p':p,
+    }
+    return render(request,'main/edit_profile.html',context)
 
 def view_profile(request,id):
     if not request.user.is_authenticated:

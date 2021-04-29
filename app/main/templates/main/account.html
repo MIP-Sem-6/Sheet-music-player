@@ -89,195 +89,215 @@
     font-weight: 600;
     color: #fba70b;
 }
+.btn{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-decoration: none;
+
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
 </style>
 <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="{{ profile.pic.url }}" alt=""/>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{{ profile.pic.url }}" alt=""/>
                             
-                        </div>
+                </div>
                        
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                        {{ request.user.first_name }} {{ request.user.last_name }}
-                                    </h5>
-                                    <h6>
-                                        @{{ request.user }}
-                                    </h6>
-                                    " {{ profile.bio }} "
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                    </h5>
+                    <h6>
+                    @{{ request.user }}
+                    </h6>
+                     " {{ profile.bio }} "
                                     
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Statistics</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="profile" aria-selected="false">Following</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="profile" aria-selected="false">Followers</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                        <!--                         <a href="{% url 'edit_profile' %}" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"> Edit Profile </a>
--->
-                    </div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Statistics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="profile" aria-selected="false">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="profile" aria-selected="false">Followers</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>FAVOURITE GENRES</p>
-                            {% for x in my_tags %}
-                            <a href="{% url 'tag' x %}" style="text-transform: uppercase;">{{ x }}</a><br/>
-                            {% endfor %}
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ request.user }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{ request.user.email }}</p>
-                                            </div>
-                                        </div>
-                                     
+            </div>
+            <div class="col-md-2">
+                                               <a href="{% url 'edit_profile' %}" class="btn" value="Edit Profile"> Edit Profile </a>
 
-                                        
-                                         
-                                        
-                            </div>
-                            
-                            
-                            
-                            
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Pro</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Songs uploaded</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{count_my}}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Favourite songs</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{count_fav}}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hours spent</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>20hrs 24mins</p>
-                                    </div>
-                                </div>
-                             
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Followers</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{followers}}</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Following</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{following}}</p>
-                                    </div>
-                                </div>
-                                    
-                                
-                            </div>
-                            <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
-                                {% for ob in f %}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>{{ob.user2}} </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <i><img src="{{ ob.profile2.pic.url }}" alt="Author One" height="100" width="100" style="border-radius: 50%;"></i>
-                                            </div>
-                                        </div>
-                    
-                                       
-            
-                                 {% endfor %}       
-                            </div>
-                            <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-                                {% for ob in f2 %}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>{{ob.user}} </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <i><img src="{{ ob.pic.url }}" alt="Author One" height="100" width="100" style='border-radius: 50%'></i>
-                                            </div>
-                                        </div>
-                    
-                                        </div>
-            
-                                {% endfor %}       
-                            </div>
-                        </div>
-                        </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </form>           
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>FAVOURITE GENRES</p>
+                    {% for x in my_tags %}
+                    <a href="{% url 'tag' x %}" style="text-transform: uppercase;">{{ x }}</a><br/>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>User Id</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ request.user }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ request.user.email }}</p>
+                                </div>
+                            </div>
+        
+                    </div>
+                            
+                            
+                            
+                            
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Pro</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Songs uploaded</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{count_my}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Favourite songs</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{count_fav}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hours spent</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>20hrs 24mins</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Followers</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{followers}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Following</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{following}}</p>
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
+                    <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                        {% for ob in f %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>{{ob.user2}} </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i><img src="{{ ob.profile2.pic.url }}" alt="Author One" height="100" width="100" style="border-radius: 50%;"></i>
+                                    </div>
+                                </div>
+            
+                                <br>
+    
+                        {% endfor %}       
+                    </div>
+                    <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+                        {% for ob in f2 %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>{{ob.user}} </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i><img src="{{ ob.pic.url }}" alt="Author One" height="100" width="100" style='border-radius: 50%'></i>
+                                    </div>
+                                </div>
+            
+                                <br>
+    
+                        {% endfor %}       
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    
+    </form>           
+</div>
         <footer id="contact-us">
             <div class="container">
                
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="sub-footer">
-                            <p>Copyright &copy; Coffee n Code</p>
+                            <p>Clef Music Player | Created by Hansi, Himali, Parth</p>
                         </div>
                     </div>
                 </div>

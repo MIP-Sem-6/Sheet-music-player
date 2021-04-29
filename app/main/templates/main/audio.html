@@ -345,7 +345,7 @@ input:checked + .slider:before {
 .btn{
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-bottom: 5%;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;
@@ -367,6 +367,9 @@ input:checked + .slider:before {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+.btn:hover {
+  background-color: #f4813fd8;
 }
 
 @-webkit-keyframes bounceOutLeft {
@@ -432,10 +435,19 @@ input:checked + .slider:before {
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.download-audio {
+    margin-left:25%;
+    margin-right: 25%;
+    align-items: center;
+    text-align: center;
+}
 </style>
 
 {% if tab == 1 %}
-<a href="{% static path %}" download="">Clcik here to download the file</a>
+
+<div class="download-audio">
+<a href="{% static path %}" download="">Click here to download the file</a>
 <form id="contact" action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 <br> 
@@ -449,6 +461,16 @@ input:checked + .slider:before {
   Send Email
 </button>
 </form>
+</div>
+<footer id="contact-us">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="sub-footer">
+            <p>Clef Music Player | Created by Hansi, Himali, Parth</a></p>
+        </div>
+    </div>
+</div>
+</footer>
 {% else %}
 
 
@@ -507,7 +529,7 @@ input:checked + .slider:before {
 
                             {% if id == 2 %}
                             <div class="row">
-                                <div class="main-wrapper">
+                                <div class="main-wrapper" style="width:120%">
                                 
                                    
                                     <div class="form-group">
@@ -539,7 +561,7 @@ input:checked + .slider:before {
                                             </button>
                                         </fieldset>
                                         <button class="main-button-slider" name="audio">
-                                            Download Audio
+                                            Generate Audio
                                         </button>
                                     </fieldset>
 
@@ -567,7 +589,7 @@ input:checked + .slider:before {
                 <!-- ***** Contact Form End ***** -->
                 <div class="right-content col-lg-6 col-md-12 col-sm-12">
                     <h2>Generate new audio file</h2>
-                    <p>Enter image of the sheet music!</p>
+                    <p>Enter image of the sheet music to get started!</p>
                         
                     
                 </div>
@@ -576,9 +598,7 @@ input:checked + .slider:before {
         <div class="row">
             <div class="col-lg-12">
                 <div class="sub-footer">
-                    <p>Copyright &copy; 2020 Lava Landing Page
-
-                    | Designed by <a rel="nofollow" href="https://templatemo.com">TemplateMo</a></p>
+                    <p>Clef Music Player | Created by Hansi, Himali, Parth</a></p>
                 </div>
             </div>
         </div>
