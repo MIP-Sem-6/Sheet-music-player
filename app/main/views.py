@@ -484,7 +484,7 @@ def audio(request,id):
         subject = f'Audio file by {request.user.username}'
         message = f'Service provided by SMP'
         mail = EmailMessage(subject, message, 'smp.mip123@gmail.com', [email])
-        mail.attach_file('/Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/music-file.mp3')
+        mail.attach_file('/home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/music-file.mp3')
         mail.send()
         messages.success(request, 'Email has been sent')
         id = 2

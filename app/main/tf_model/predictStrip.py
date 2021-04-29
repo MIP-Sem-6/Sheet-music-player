@@ -11,10 +11,10 @@ import os
 logging.getLogger('tensorflow').disabled = True
 
 image_loc = "Data/Example/1.jpg" 
-#voc_file = '/home/boomerang/boomerang/BTech_CS/MIP-Sem6/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt'
-#model = '/home/boomerang/boomerang/BTech_CS/MIP-Sem6/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta'
-voc_file = '/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt'
-model = '/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta'
+voc_file = '/home/boomerang/boomerang/BTech_CS/MIP-Sem6/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt'
+model = '/home/boomerang/boomerang/BTech_CS/MIP-Sem6/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta'
+# voc_file = '/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/Data/vocabulary_semantic.txt'
+# model = '/Users/himalisaini/Desktop/Sheet-music-player/app/main/tf_model/SemanticModel/semantic_model.meta'
 
 
 # url = staticfiles_storage.url('data/foobar.csv')
@@ -240,8 +240,7 @@ def notesToMusic(notes_arr):
 				time += duration
 			elif splits2[0] == "note":
 				num = splits2[1][-1]
-				pitch = splits[1]
-				print(pitch)
+				pitch = splits2[1]
 				duration = duration_switcher.get(splits[1])
 				pitch = (12 * int(num)) + pitch_switcher.get(pitch[0:-1], 0)
 				if pitch and duration:
@@ -249,10 +248,10 @@ def notesToMusic(notes_arr):
 					mf.addNote(track, channel, pitch, time, duration, volume)
 					time += duration
 # note-D4_half
-	#with open("/home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/midi-file.mid", 'wb') as outf:
-	with open("/Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/midi-file.mid", 'wb') as outf:
+	# with open("/Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/midi-file.mid", 'wb') as outf:
+	with open("/home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/midi-file.mid", 'wb') as outf:
 		mf.writeFile(outf)
 
-	#os.system('midi2audio /home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/midi-file.mid /home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/music-file.mp3')
-	os.system('midi2audio /Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/midi-file.mid /Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/music-file.mp3')
+	os.system('midi2audio /home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/midi-file.mid /home/boomerang/boomerang/BTech_CS/MIP-Sem6/cloned/Sheet-music-player/app/main/static/main/music/music-file.mp3')
+	# os.system('midi2audio /Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/midi-file.mid /Users/himalisaini/Desktop/Sheet-music-player/app/main/static/main/music/music-file.mp3')
 
