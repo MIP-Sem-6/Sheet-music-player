@@ -1,4 +1,6 @@
 # Sheet-music-player
+Web based application integrated with machine learning.Users can upload their sheet music (Image) and the application will convert it into editable notes and then into audio via ML models.The app consists of a complete musical playground where users can upload and store their musical compositions ,play, update, delete and share the songs with other users.There is a seperate section which displays the user's favourite compositions. The songs have been clustered based on genre, users can follow / unfollow their favourite artists and connected users can view and play each other's compositions.Users can also share their music via codes or email. 
+
 To run this project
 
 1.FIRST TIME ( or in case of changes in database )
